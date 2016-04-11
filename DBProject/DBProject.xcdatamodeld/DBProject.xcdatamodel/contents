@@ -1,4 +1,122 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="12E55" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="AllSpeakerPhone" representedClassName="AllSpeakerPhone" syncable="YES">
+        <attribute name="phonenum" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="phonessowner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AllSpeakers" inverseName="phones" inverseEntity="AllSpeakers" syncable="YES"/>
+    </entity>
+    <entity name="AllSpeakers" representedClassName="AllSpeakers" syncable="YES">
+        <attribute name="biography" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fristName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="img" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="imgurl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="middleName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="mobiles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AllSpeakersMobiles" inverseName="mobilesowner" inverseEntity="AllSpeakersMobiles" syncable="YES"/>
+        <relationship name="phones" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AllSpeakerPhone" inverseName="phonessowner" inverseEntity="AllSpeakerPhone" syncable="YES"/>
+    </entity>
+    <entity name="AllSpeakersMobiles" representedClassName="AllSpeakersMobiles" syncable="YES">
+        <attribute name="mobilenum" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="mobilesowner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AllSpeakers" inverseName="mobiles" inverseEntity="AllSpeakers" syncable="YES"/>
+    </entity>
+    <entity name="Exhiptors" representedClassName="Exhiptors" syncable="YES">
+        <attribute name="cityName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyAbout" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="emailExh" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fax" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="img" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="imgurl" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="mobiles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MobilesOfExhiptors" inverseName="exhiptor" inverseEntity="MobilesOfExhiptors" syncable="YES"/>
+        <relationship name="phones" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PhonesOfExhiptors" inverseName="exhiptor" inverseEntity="PhonesOfExhiptors" syncable="YES"/>
+    </entity>
+    <entity name="MobilesOfExhiptors" representedClassName="MobilesOfExhiptors" syncable="YES">
+        <attribute name="mobilenum" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="exhiptor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exhiptors" inverseName="mobiles" inverseEntity="Exhiptors" syncable="YES"/>
+    </entity>
+    <entity name="MobilesOfSpeakers" representedClassName="MobilesOfSpeakers" syncable="YES">
+        <attribute name="mobilenum" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="mobilesowner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Speaker" inverseName="mobiles" inverseEntity="Speaker" syncable="YES"/>
+    </entity>
+    <entity name="PhonesOfExhiptors" representedClassName="PhonesOfExhiptors" syncable="YES">
+        <attribute name="phonenum" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="exhiptor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exhiptors" inverseName="phones" inverseEntity="Exhiptors" syncable="YES"/>
+    </entity>
+    <entity name="PhonesOfSpeakers" representedClassName="PhonesOfSpeakers" syncable="YES">
+        <attribute name="phonenum" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="phonessowner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Speaker" inverseName="phones" inverseEntity="Speaker" syncable="YES"/>
+    </entity>
+    <entity name="Sessions" representedClassName="Sessions" syncable="YES">
+        <attribute name="descrption" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="endDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="like" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="speakers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Speaker" inverseName="session" inverseEntity="Speaker" syncable="YES"/>
+    </entity>
+    <entity name="Speaker" representedClassName="Speaker" syncable="YES">
+        <attribute name="biography" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fristName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="img" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="imgurl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="middleName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="mobiles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MobilesOfSpeakers" inverseName="mobilesowner" inverseEntity="MobilesOfSpeakers" syncable="YES"/>
+        <relationship name="phones" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PhonesOfSpeakers" inverseName="phonessowner" inverseEntity="PhonesOfSpeakers" syncable="YES"/>
+        <relationship name="session" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sessions" inverseName="speakers" inverseEntity="Sessions" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="cityName" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="img" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="imgurl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="middleName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="mobiles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserMobiles" inverseName="mobileOwner" inverseEntity="UserMobiles" syncable="YES"/>
+        <relationship name="phones" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserPhones" inverseName="phoneOwner" inverseEntity="UserPhones" syncable="YES"/>
+    </entity>
+    <entity name="UserMobiles" representedClassName="UserMobiles" syncable="YES">
+        <attribute name="userMobileNum" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="mobileOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="mobiles" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="UserPhones" representedClassName="UserPhones" syncable="YES">
+        <attribute name="userPhoneNum" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="phoneOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="phones" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Exhiptors" positionX="45" positionY="-0" width="128" height="255"/>
+        <element name="MobilesOfExhiptors" positionX="333" positionY="36" width="128" height="75"/>
+        <element name="MobilesOfSpeakers" positionX="-101" positionY="159" width="128" height="75"/>
+        <element name="PhonesOfExhiptors" positionX="304" positionY="225" width="128" height="75"/>
+        <element name="PhonesOfSpeakers" positionX="-101" positionY="33" width="128" height="75"/>
+        <element name="Sessions" positionX="-27" positionY="300" width="128" height="193"/>
+        <element name="Speaker" positionX="-297" positionY="41" width="128" height="238"/>
+        <element name="AllSpeakers" positionX="-459" positionY="306" width="128" height="223"/>
+        <element name="AllSpeakerPhone" positionX="-270" positionY="332" width="128" height="73"/>
+        <element name="AllSpeakersMobiles" positionX="-252" positionY="476" width="128" height="73"/>
+        <element name="User" positionX="-74" positionY="522" width="128" height="238"/>
+        <element name="UserPhones" positionX="142" positionY="711" width="128" height="73"/>
+        <element name="UserMobiles" positionX="126" positionY="549" width="128" height="73"/>
+    </elements>
 </model>

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D192BA0B1CB3F578003F1019 /* Speaker.m in Sources */ = {isa = PBXBuildFile; fileRef = D192BA0A1CB3F578003F1019 /* Speaker.m */; };
+		D192BA0E1CB41368003F1019 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D192BA0D1CB41368003F1019 /* CoreDataManager.m */; };
 		D192D2AB1CB2AC1600BEC2C5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D192D2AA1CB2AC1600BEC2C5 /* Foundation.framework */; };
 		D192D2AD1CB2AC1600BEC2C5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D192D2AC1CB2AC1600BEC2C5 /* CoreGraphics.framework */; };
 		D192D2AF1CB2AC1600BEC2C5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D192D2AE1CB2AC1600BEC2C5 /* UIKit.framework */; };
@@ -22,6 +24,23 @@
 		D192D2CC1CB2AC1700BEC2C5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D192D2B01CB2AC1600BEC2C5 /* CoreData.framework */; };
 		D192D2D41CB2AC1700BEC2C5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D192D2D21CB2AC1700BEC2C5 /* InfoPlist.strings */; };
 		D192D2D61CB2AC1700BEC2C5 /* DBProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D192D2D51CB2AC1700BEC2C5 /* DBProjectTests.m */; };
+		D192D2E01CB2AC7200BEC2C5 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D192D2DF1CB2AC7200BEC2C5 /* Storyboard.storyboard */; };
+		D19360AF1CB2E15A003166FB /* PhonesOfSpeakers.m in Sources */ = {isa = PBXBuildFile; fileRef = D19360AE1CB2E15A003166FB /* PhonesOfSpeakers.m */; };
+		D19360B21CB2E15B003166FB /* MobilesOfSpeakers.m in Sources */ = {isa = PBXBuildFile; fileRef = D19360B11CB2E15B003166FB /* MobilesOfSpeakers.m */; };
+		D19360B81CB2E766003166FB /* Exhiptors.m in Sources */ = {isa = PBXBuildFile; fileRef = D19360B71CB2E766003166FB /* Exhiptors.m */; };
+		D19360BB1CB2E767003166FB /* PhonesOfExhiptors.m in Sources */ = {isa = PBXBuildFile; fileRef = D19360BA1CB2E767003166FB /* PhonesOfExhiptors.m */; };
+		D19360BE1CB2E768003166FB /* MobilesOfExhiptors.m in Sources */ = {isa = PBXBuildFile; fileRef = D19360BD1CB2E768003166FB /* MobilesOfExhiptors.m */; };
+		D19360C41CB2EC29003166FB /* Sessions.m in Sources */ = {isa = PBXBuildFile; fileRef = D19360C31CB2EC29003166FB /* Sessions.m */; };
+		D1A1DEA91CBAC0660052CDED /* UserPhones.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A1DEA81CBAC0660052CDED /* UserPhones.m */; };
+		D1A1DEAC1CBAC0670052CDED /* UserMobiles.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A1DEAB1CBAC0670052CDED /* UserMobiles.m */; };
+		D1A1DEAF1CBAC0680052CDED /* AllSpeakerPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A1DEAE1CBAC0670052CDED /* AllSpeakerPhone.m */; };
+		D1A1DEB21CBAC0680052CDED /* AllSpeakers.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A1DEB11CBAC0680052CDED /* AllSpeakers.m */; };
+		D1A1DEB51CBAC0680052CDED /* AllSpeakersMobiles.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A1DEB41CBAC0680052CDED /* AllSpeakersMobiles.m */; };
+		D1A1DEB81CBAC0680052CDED /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A1DEB71CBAC0680052CDED /* User.m */; };
+		D1B3111C1CB9259B00FEE17A /* IOSAgenda.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B3111B1CB9259A00FEE17A /* IOSAgenda.m */; };
+		D1B3111F1CB932E100FEE17A /* IOSMainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B3111E1CB932E100FEE17A /* IOSMainMenu.m */; };
+		D1B311231CB9407D00FEE17A /* f.png in Resources */ = {isa = PBXBuildFile; fileRef = D1B311211CB9407D00FEE17A /* f.png */; };
+		D1B311241CB9407D00FEE17A /* m.png in Resources */ = {isa = PBXBuildFile; fileRef = D1B311221CB9407D00FEE17A /* m.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +54,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D192BA091CB3F578003F1019 /* Speaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Speaker.h; path = DBProject/Speaker.h; sourceTree = "<group>"; };
+		D192BA0A1CB3F578003F1019 /* Speaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Speaker.m; path = DBProject/Speaker.m; sourceTree = "<group>"; };
+		D192BA0C1CB41368003F1019 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
+		D192BA0D1CB41368003F1019 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
 		D192D2A71CB2AC1600BEC2C5 /* DBProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DBProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D192D2AA1CB2AC1600BEC2C5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D192D2AC1CB2AC1600BEC2C5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -53,6 +76,37 @@
 		D192D2D11CB2AC1700BEC2C5 /* DBProjectTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DBProjectTests-Info.plist"; sourceTree = "<group>"; };
 		D192D2D31CB2AC1700BEC2C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D192D2D51CB2AC1700BEC2C5 /* DBProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DBProjectTests.m; sourceTree = "<group>"; };
+		D192D2DF1CB2AC7200BEC2C5 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		D19360AD1CB2E15A003166FB /* PhonesOfSpeakers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhonesOfSpeakers.h; path = DBProject/PhonesOfSpeakers.h; sourceTree = "<group>"; };
+		D19360AE1CB2E15A003166FB /* PhonesOfSpeakers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhonesOfSpeakers.m; path = DBProject/PhonesOfSpeakers.m; sourceTree = "<group>"; };
+		D19360B01CB2E15B003166FB /* MobilesOfSpeakers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MobilesOfSpeakers.h; path = DBProject/MobilesOfSpeakers.h; sourceTree = "<group>"; };
+		D19360B11CB2E15B003166FB /* MobilesOfSpeakers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MobilesOfSpeakers.m; path = DBProject/MobilesOfSpeakers.m; sourceTree = "<group>"; };
+		D19360B61CB2E766003166FB /* Exhiptors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Exhiptors.h; path = DBProject/Exhiptors.h; sourceTree = "<group>"; };
+		D19360B71CB2E766003166FB /* Exhiptors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Exhiptors.m; path = DBProject/Exhiptors.m; sourceTree = "<group>"; };
+		D19360B91CB2E767003166FB /* PhonesOfExhiptors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhonesOfExhiptors.h; path = DBProject/PhonesOfExhiptors.h; sourceTree = "<group>"; };
+		D19360BA1CB2E767003166FB /* PhonesOfExhiptors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhonesOfExhiptors.m; path = DBProject/PhonesOfExhiptors.m; sourceTree = "<group>"; };
+		D19360BC1CB2E768003166FB /* MobilesOfExhiptors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MobilesOfExhiptors.h; path = DBProject/MobilesOfExhiptors.h; sourceTree = "<group>"; };
+		D19360BD1CB2E768003166FB /* MobilesOfExhiptors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MobilesOfExhiptors.m; path = DBProject/MobilesOfExhiptors.m; sourceTree = "<group>"; };
+		D19360C21CB2EC29003166FB /* Sessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sessions.h; sourceTree = "<group>"; };
+		D19360C31CB2EC29003166FB /* Sessions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sessions.m; sourceTree = "<group>"; };
+		D1A1DEA71CBAC0660052CDED /* UserPhones.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPhones.h; sourceTree = "<group>"; };
+		D1A1DEA81CBAC0660052CDED /* UserPhones.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPhones.m; sourceTree = "<group>"; };
+		D1A1DEAA1CBAC0670052CDED /* UserMobiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserMobiles.h; sourceTree = "<group>"; };
+		D1A1DEAB1CBAC0670052CDED /* UserMobiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserMobiles.m; sourceTree = "<group>"; };
+		D1A1DEAD1CBAC0670052CDED /* AllSpeakerPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllSpeakerPhone.h; sourceTree = "<group>"; };
+		D1A1DEAE1CBAC0670052CDED /* AllSpeakerPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllSpeakerPhone.m; sourceTree = "<group>"; };
+		D1A1DEB01CBAC0680052CDED /* AllSpeakers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllSpeakers.h; sourceTree = "<group>"; };
+		D1A1DEB11CBAC0680052CDED /* AllSpeakers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllSpeakers.m; sourceTree = "<group>"; };
+		D1A1DEB31CBAC0680052CDED /* AllSpeakersMobiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllSpeakersMobiles.h; sourceTree = "<group>"; };
+		D1A1DEB41CBAC0680052CDED /* AllSpeakersMobiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllSpeakersMobiles.m; sourceTree = "<group>"; };
+		D1A1DEB61CBAC0680052CDED /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		D1A1DEB71CBAC0680052CDED /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		D1B3111A1CB9259A00FEE17A /* IOSAgenda.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOSAgenda.h; sourceTree = "<group>"; };
+		D1B3111B1CB9259A00FEE17A /* IOSAgenda.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOSAgenda.m; sourceTree = "<group>"; };
+		D1B3111D1CB932E100FEE17A /* IOSMainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOSMainMenu.h; sourceTree = "<group>"; };
+		D1B3111E1CB932E100FEE17A /* IOSMainMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOSMainMenu.m; sourceTree = "<group>"; };
+		D1B311211CB9407D00FEE17A /* f.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = f.png; sourceTree = "<group>"; };
+		D1B311221CB9407D00FEE17A /* m.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = m.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,9 +135,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D192BA0F1CB41372003F1019 /* CoreDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				D192BA0C1CB41368003F1019 /* CoreDataManager.h */,
+				D192BA0D1CB41368003F1019 /* CoreDataManager.m */,
+			);
+			name = CoreDataManager;
+			sourceTree = "<group>";
+		};
 		D192D29E1CB2AC1600BEC2C5 = {
 			isa = PBXGroup;
 			children = (
+				D1B311201CB9406100FEE17A /* Other Files */,
+				D1B311161CB91A8E00FEE17A /* Agenda */,
+				D1B311121CB90C0400FEE17A /* Main Menu */,
+				D192BA0F1CB41372003F1019 /* CoreDataManager */,
+				D19360B51CB2E3E0003166FB /* beans */,
 				D192D2B21CB2AC1600BEC2C5 /* DBProject */,
 				D192D2CF1CB2AC1700BEC2C5 /* DBProjectTests */,
 				D192D2A91CB2AC1600BEC2C5 /* Frameworks */,
@@ -120,6 +188,7 @@
 				D192D2C11CB2AC1600BEC2C5 /* Images.xcassets */,
 				D192D2BE1CB2AC1600BEC2C5 /* DBProject.xcdatamodeld */,
 				D192D2B31CB2AC1600BEC2C5 /* Supporting Files */,
+				D192D2DF1CB2AC7200BEC2C5 /* Storyboard.storyboard */,
 			);
 			path = DBProject;
 			sourceTree = "<group>";
@@ -151,6 +220,170 @@
 				D192D2D21CB2AC1700BEC2C5 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D19360A81CB2DFEA003166FB /* speaker */ = {
+			isa = PBXGroup;
+			children = (
+				D192BA091CB3F578003F1019 /* Speaker.h */,
+				D192BA0A1CB3F578003F1019 /* Speaker.m */,
+				D19360B41CB2E16B003166FB /* mobiles */,
+				D19360B31CB2E161003166FB /* phones */,
+			);
+			name = speaker;
+			sourceTree = "<group>";
+		};
+		D19360B31CB2E161003166FB /* phones */ = {
+			isa = PBXGroup;
+			children = (
+				D19360AD1CB2E15A003166FB /* PhonesOfSpeakers.h */,
+				D19360AE1CB2E15A003166FB /* PhonesOfSpeakers.m */,
+			);
+			name = phones;
+			sourceTree = "<group>";
+		};
+		D19360B41CB2E16B003166FB /* mobiles */ = {
+			isa = PBXGroup;
+			children = (
+				D19360B01CB2E15B003166FB /* MobilesOfSpeakers.h */,
+				D19360B11CB2E15B003166FB /* MobilesOfSpeakers.m */,
+			);
+			name = mobiles;
+			sourceTree = "<group>";
+		};
+		D19360B51CB2E3E0003166FB /* beans */ = {
+			isa = PBXGroup;
+			children = (
+				D1A1DEB91CBAC0720052CDED /* User */,
+				D1A1DEBC1CBAC1530052CDED /* Speakers */,
+				D19360C51CB2EC3E003166FB /* sessions */,
+				D19360BF1CB2E77E003166FB /* exhiptor */,
+			);
+			name = beans;
+			sourceTree = "<group>";
+		};
+		D19360BF1CB2E77E003166FB /* exhiptor */ = {
+			isa = PBXGroup;
+			children = (
+				D19360C11CB2E7B2003166FB /* phones */,
+				D19360C01CB2E7A8003166FB /* mobiles */,
+				D19360B61CB2E766003166FB /* Exhiptors.h */,
+				D19360B71CB2E766003166FB /* Exhiptors.m */,
+			);
+			name = exhiptor;
+			sourceTree = "<group>";
+		};
+		D19360C01CB2E7A8003166FB /* mobiles */ = {
+			isa = PBXGroup;
+			children = (
+				D19360BC1CB2E768003166FB /* MobilesOfExhiptors.h */,
+				D19360BD1CB2E768003166FB /* MobilesOfExhiptors.m */,
+			);
+			name = mobiles;
+			sourceTree = "<group>";
+		};
+		D19360C11CB2E7B2003166FB /* phones */ = {
+			isa = PBXGroup;
+			children = (
+				D19360B91CB2E767003166FB /* PhonesOfExhiptors.h */,
+				D19360BA1CB2E767003166FB /* PhonesOfExhiptors.m */,
+			);
+			name = phones;
+			sourceTree = "<group>";
+		};
+		D19360C51CB2EC3E003166FB /* sessions */ = {
+			isa = PBXGroup;
+			children = (
+				D19360A81CB2DFEA003166FB /* speaker */,
+				D19360C21CB2EC29003166FB /* Sessions.h */,
+				D19360C31CB2EC29003166FB /* Sessions.m */,
+			);
+			name = sessions;
+			sourceTree = "<group>";
+		};
+		D1A1DEB91CBAC0720052CDED /* User */ = {
+			isa = PBXGroup;
+			children = (
+				D1A1DEB61CBAC0680052CDED /* User.h */,
+				D1A1DEB71CBAC0680052CDED /* User.m */,
+				D1A1DEBB1CBAC0970052CDED /* UserMobiles */,
+				D1A1DEBA1CBAC0800052CDED /* UserPhones */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
+		D1A1DEBA1CBAC0800052CDED /* UserPhones */ = {
+			isa = PBXGroup;
+			children = (
+				D1A1DEA71CBAC0660052CDED /* UserPhones.h */,
+				D1A1DEA81CBAC0660052CDED /* UserPhones.m */,
+			);
+			name = UserPhones;
+			sourceTree = "<group>";
+		};
+		D1A1DEBB1CBAC0970052CDED /* UserMobiles */ = {
+			isa = PBXGroup;
+			children = (
+				D1A1DEAA1CBAC0670052CDED /* UserMobiles.h */,
+				D1A1DEAB1CBAC0670052CDED /* UserMobiles.m */,
+			);
+			name = UserMobiles;
+			sourceTree = "<group>";
+		};
+		D1A1DEBC1CBAC1530052CDED /* Speakers */ = {
+			isa = PBXGroup;
+			children = (
+				D1A1DEB11CBAC0680052CDED /* AllSpeakers.m */,
+				D1A1DEB01CBAC0680052CDED /* AllSpeakers.h */,
+				D1A1DEBE1CBAC20A0052CDED /* Phones */,
+				D1A1DEBD1CBAC1B10052CDED /* mobiles */,
+			);
+			name = Speakers;
+			sourceTree = "<group>";
+		};
+		D1A1DEBD1CBAC1B10052CDED /* mobiles */ = {
+			isa = PBXGroup;
+			children = (
+				D1A1DEB31CBAC0680052CDED /* AllSpeakersMobiles.h */,
+				D1A1DEB41CBAC0680052CDED /* AllSpeakersMobiles.m */,
+			);
+			name = mobiles;
+			sourceTree = "<group>";
+		};
+		D1A1DEBE1CBAC20A0052CDED /* Phones */ = {
+			isa = PBXGroup;
+			children = (
+				D1A1DEAD1CBAC0670052CDED /* AllSpeakerPhone.h */,
+				D1A1DEAE1CBAC0670052CDED /* AllSpeakerPhone.m */,
+			);
+			name = Phones;
+			sourceTree = "<group>";
+		};
+		D1B311121CB90C0400FEE17A /* Main Menu */ = {
+			isa = PBXGroup;
+			children = (
+				D1B3111D1CB932E100FEE17A /* IOSMainMenu.h */,
+				D1B3111E1CB932E100FEE17A /* IOSMainMenu.m */,
+			);
+			name = "Main Menu";
+			sourceTree = "<group>";
+		};
+		D1B311161CB91A8E00FEE17A /* Agenda */ = {
+			isa = PBXGroup;
+			children = (
+				D1B3111A1CB9259A00FEE17A /* IOSAgenda.h */,
+				D1B3111B1CB9259A00FEE17A /* IOSAgenda.m */,
+			);
+			name = Agenda;
+			sourceTree = "<group>";
+		};
+		D1B311201CB9406100FEE17A /* Other Files */ = {
+			isa = PBXGroup;
+			children = (
+				D1B311211CB9407D00FEE17A /* f.png */,
+				D1B311221CB9407D00FEE17A /* m.png */,
+			);
+			name = "Other Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,6 +464,9 @@
 			files = (
 				D192D2B71CB2AC1600BEC2C5 /* InfoPlist.strings in Resources */,
 				D192D2C21CB2AC1600BEC2C5 /* Images.xcassets in Resources */,
+				D1B311231CB9407D00FEE17A /* f.png in Resources */,
+				D192D2E01CB2AC7200BEC2C5 /* Storyboard.storyboard in Resources */,
+				D1B311241CB9407D00FEE17A /* m.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,9 +485,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1B3111C1CB9259B00FEE17A /* IOSAgenda.m in Sources */,
 				D192D2BD1CB2AC1600BEC2C5 /* IOSAppDelegate.m in Sources */,
+				D192BA0E1CB41368003F1019 /* CoreDataManager.m in Sources */,
+				D1A1DEB51CBAC0680052CDED /* AllSpeakersMobiles.m in Sources */,
+				D19360AF1CB2E15A003166FB /* PhonesOfSpeakers.m in Sources */,
+				D19360BB1CB2E767003166FB /* PhonesOfExhiptors.m in Sources */,
+				D19360B21CB2E15B003166FB /* MobilesOfSpeakers.m in Sources */,
+				D19360B81CB2E766003166FB /* Exhiptors.m in Sources */,
 				D192D2B91CB2AC1600BEC2C5 /* main.m in Sources */,
+				D19360C41CB2EC29003166FB /* Sessions.m in Sources */,
+				D1A1DEA91CBAC0660052CDED /* UserPhones.m in Sources */,
+				D1A1DEAF1CBAC0680052CDED /* AllSpeakerPhone.m in Sources */,
+				D19360BE1CB2E768003166FB /* MobilesOfExhiptors.m in Sources */,
+				D1A1DEB21CBAC0680052CDED /* AllSpeakers.m in Sources */,
+				D1B3111F1CB932E100FEE17A /* IOSMainMenu.m in Sources */,
+				D1A1DEB81CBAC0680052CDED /* User.m in Sources */,
+				D1A1DEAC1CBAC0670052CDED /* UserMobiles.m in Sources */,
 				D192D2C01CB2AC1600BEC2C5 /* DBProject.xcdatamodeld in Sources */,
+				D192BA0B1CB3F578003F1019 /* Speaker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +704,7 @@
 				D192D2DB1CB2AC1700BEC2C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D192D2DC1CB2AC1700BEC2C5 /* Build configuration list for PBXNativeTarget "DBProjectTests" */ = {
 			isa = XCConfigurationList;
@@ -460,6 +713,7 @@
 				D192D2DE1CB2AC1700BEC2C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
