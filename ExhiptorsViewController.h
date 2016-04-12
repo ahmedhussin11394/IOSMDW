@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ExhiptorsViewController : UITableViewController < NSURLConnectionDataDelegate , NSURLConnectionDelegate>
+#import "NetworkDelegate.h"
+@interface ExhiptorsViewController : UITableViewController < NetworkDelegate>
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong,nonatomic) NSMutableArray *myData;
 @end

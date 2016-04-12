@@ -11,6 +11,9 @@
 #import "Exhiptors.h"
 #import "PhonesOfExhiptors.h"
 #import "MobilesOfExhiptors.h"
+#import "NetworkClass.h"
+#import "NetworkManger.h"
+#import "NetworkDelegate.h"
 
 @interface ExhiptorsViewController ()
 
@@ -45,6 +48,10 @@
     [con start];
     printf("\n nnnnnnnnn %s ","mona adel");
     
+    NetworkManger *NetMang=[NetworkManger new];
+    NetworkClass *Netcl=[NetMang getNetworkInstance];
+    [Netcl setMyDelegate:self];
+    [Netcl getExhiptors];
 
 
     // Uncomment the following line to preserve selection between presentations.

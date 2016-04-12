@@ -47,7 +47,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="keN-Hp-L0z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="801" y="407"/>
+            <point key="canvasLocation" x="1051" y="145"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="OMV-ft-Gai">
@@ -66,7 +66,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hjo-ns-ajg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1622" y="257"/>
+            <point key="canvasLocation" x="1534" y="157"/>
         </scene>
         <!--Agenda - AllDays-->
         <scene sceneID="Ava-Ra-v6O">
@@ -120,7 +120,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7T0-fV-c9i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2421" y="-578"/>
+            <point key="canvasLocation" x="2127" y="-720"/>
         </scene>
         <!--Table View Controller - Third-->
         <scene sceneID="C4K-Hs-fsq">
@@ -228,7 +228,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="944-LK-njy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1848" y="-476"/>
+            <point key="canvasLocation" x="1402" y="-554"/>
         </scene>
         <!--Main Menu-->
         <scene sceneID="4w2-IY-hxS">
@@ -303,7 +303,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qvd-kf-nES" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-367" y="418"/>
+            <point key="canvasLocation" x="87" y="126"/>
         </scene>
         <!--Exhiptors View Controller-->
         <scene sceneID="2Vg-H6-eMj">
@@ -331,7 +331,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3iA-mT-onL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="24" y="-31"/>
+            <point key="canvasLocation" x="622" y="121"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
