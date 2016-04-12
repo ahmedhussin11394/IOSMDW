@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D1752AB01CBD43E900A0E9AD /* SpeakersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1752AAF1CBD43E900A0E9AD /* SpeakersViewController.m */; };
-		D1752AB31CBD440700A0E9AD /* ExhiptorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1752AB21CBD440700A0E9AD /* ExhiptorsViewController.m */; };
+		D1752AB91CBD491B00A0E9AD /* SpeakersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1752AB81CBD491B00A0E9AD /* SpeakersViewController.m */; };
+		D1752ABA1CBD491B00A0E9AD /* SpeakersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1752AB81CBD491B00A0E9AD /* SpeakersViewController.m */; };
+		D1752ABD1CBD495400A0E9AD /* ExhiptorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1752ABC1CBD495400A0E9AD /* ExhiptorsViewController.m */; };
+		D1752ABE1CBD495400A0E9AD /* ExhiptorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1752ABC1CBD495400A0E9AD /* ExhiptorsViewController.m */; };
 		D192BA0B1CB3F578003F1019 /* Speaker.m in Sources */ = {isa = PBXBuildFile; fileRef = D192BA0A1CB3F578003F1019 /* Speaker.m */; };
 		D192BA0E1CB41368003F1019 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D192BA0D1CB41368003F1019 /* CoreDataManager.m */; };
 		D192D2AB1CB2AC1600BEC2C5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D192D2AA1CB2AC1600BEC2C5 /* Foundation.framework */; };
@@ -57,10 +59,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D1752AAE1CBD43E900A0E9AD /* SpeakersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpeakersViewController.h; path = ../demos/Final/MyWork/MyWork/MyProject/SpeakersViewController.h; sourceTree = "<group>"; };
-		D1752AAF1CBD43E900A0E9AD /* SpeakersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpeakersViewController.m; path = ../demos/Final/MyWork/MyWork/MyProject/SpeakersViewController.m; sourceTree = "<group>"; };
-		D1752AB11CBD440700A0E9AD /* ExhiptorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExhiptorsViewController.h; path = ../demos/Final/MyWork/MyWork/MyProject/ExhiptorsViewController.h; sourceTree = "<group>"; };
-		D1752AB21CBD440700A0E9AD /* ExhiptorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExhiptorsViewController.m; path = ../demos/Final/MyWork/MyWork/MyProject/ExhiptorsViewController.m; sourceTree = "<group>"; };
+		D1752AB71CBD491B00A0E9AD /* SpeakersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakersViewController.h; sourceTree = "<group>"; };
+		D1752AB81CBD491B00A0E9AD /* SpeakersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeakersViewController.m; sourceTree = "<group>"; };
+		D1752ABB1CBD495400A0E9AD /* ExhiptorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExhiptorsViewController.h; sourceTree = "<group>"; };
+		D1752ABC1CBD495400A0E9AD /* ExhiptorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExhiptorsViewController.m; sourceTree = "<group>"; };
 		D192BA091CB3F578003F1019 /* Speaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Speaker.h; path = DBProject/Speaker.h; sourceTree = "<group>"; };
 		D192BA0A1CB3F578003F1019 /* Speaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Speaker.m; path = DBProject/Speaker.m; sourceTree = "<group>"; };
 		D192BA0C1CB41368003F1019 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
@@ -275,8 +277,8 @@
 		D19360BF1CB2E77E003166FB /* exhiptor */ = {
 			isa = PBXGroup;
 			children = (
-				D1752AB11CBD440700A0E9AD /* ExhiptorsViewController.h */,
-				D1752AB21CBD440700A0E9AD /* ExhiptorsViewController.m */,
+				D1752ABB1CBD495400A0E9AD /* ExhiptorsViewController.h */,
+				D1752ABC1CBD495400A0E9AD /* ExhiptorsViewController.m */,
 				D19360C11CB2E7B2003166FB /* phones */,
 				D19360C01CB2E7A8003166FB /* mobiles */,
 				D19360B61CB2E766003166FB /* Exhiptors.h */,
@@ -354,8 +356,8 @@
 		D1A1DEBC1CBAC1530052CDED /* Speakers */ = {
 			isa = PBXGroup;
 			children = (
-				D1752AAE1CBD43E900A0E9AD /* SpeakersViewController.h */,
-				D1752AAF1CBD43E900A0E9AD /* SpeakersViewController.m */,
+				D1752AB71CBD491B00A0E9AD /* SpeakersViewController.h */,
+				D1752AB81CBD491B00A0E9AD /* SpeakersViewController.m */,
 				D1A1DEB11CBAC0680052CDED /* AllSpeakers.m */,
 				D1A1DEB01CBAC0680052CDED /* AllSpeakers.h */,
 				D1A1DEBE1CBAC20A0052CDED /* Phones */,
@@ -508,6 +510,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1752AB91CBD491B00A0E9AD /* SpeakersViewController.m in Sources */,
 				D1B3111C1CB9259B00FEE17A /* IOSAgenda.m in Sources */,
 				D192D2BD1CB2AC1600BEC2C5 /* IOSAppDelegate.m in Sources */,
 				D193D4821CBCFAB000BC0EC0 /* Sessions.m in Sources */,
@@ -516,10 +519,9 @@
 				D19360AF1CB2E15A003166FB /* PhonesOfSpeakers.m in Sources */,
 				D19360BB1CB2E767003166FB /* PhonesOfExhiptors.m in Sources */,
 				D19360B21CB2E15B003166FB /* MobilesOfSpeakers.m in Sources */,
-				D1752AB01CBD43E900A0E9AD /* SpeakersViewController.m in Sources */,
 				D193D47F1CBCFAAF00BC0EC0 /* Agenda.m in Sources */,
 				D19360B81CB2E766003166FB /* Exhiptors.m in Sources */,
-				D1752AB31CBD440700A0E9AD /* ExhiptorsViewController.m in Sources */,
+				D1752ABD1CBD495400A0E9AD /* ExhiptorsViewController.m in Sources */,
 				D192D2B91CB2AC1600BEC2C5 /* main.m in Sources */,
 				D1A1DEA91CBAC0660052CDED /* UserPhones.m in Sources */,
 				D1A1DEAF1CBAC0680052CDED /* AllSpeakerPhone.m in Sources */,
@@ -537,6 +539,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1752ABA1CBD491B00A0E9AD /* SpeakersViewController.m in Sources */,
+				D1752ABE1CBD495400A0E9AD /* ExhiptorsViewController.m in Sources */,
 				D192D2D61CB2AC1700BEC2C5 /* DBProjectTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
