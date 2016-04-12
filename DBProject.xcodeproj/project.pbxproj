@@ -100,6 +100,7 @@
 		D193D47E1CBCFAAF00BC0EC0 /* Agenda.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Agenda.m; path = DBProject/Agenda.m; sourceTree = "<group>"; };
 		D193D4801CBCFAB000BC0EC0 /* Sessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sessions.h; path = DBProject/Sessions.h; sourceTree = "<group>"; };
 		D193D4811CBCFAB000BC0EC0 /* Sessions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Sessions.m; path = DBProject/Sessions.m; sourceTree = "<group>"; };
+		D19848061CBD4E4400953B78 /* IOSprotocolTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IOSprotocolTest.h; sourceTree = "<group>"; };
 		D1A1DEA71CBAC0660052CDED /* UserPhones.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPhones.h; sourceTree = "<group>"; };
 		D1A1DEA81CBAC0660052CDED /* UserPhones.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPhones.m; sourceTree = "<group>"; };
 		D1A1DEAA1CBAC0670052CDED /* UserMobiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserMobiles.h; sourceTree = "<group>"; };
@@ -270,6 +271,7 @@
 				D1A1DEBC1CBAC1530052CDED /* Speakers */,
 				D19360C51CB2EC3E003166FB /* sessions */,
 				D19360BF1CB2E77E003166FB /* exhiptor */,
+				D19848061CBD4E4400953B78 /* IOSprotocolTest.h */,
 			);
 			name = beans;
 			sourceTree = "<group>";
