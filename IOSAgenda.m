@@ -38,14 +38,6 @@
     _result = [core fetchEntitiesWithClassName:@"Sessions" sortDescriptors:nil predicate:nil];
     
     
-    for (int i = 0; i<_result.count; i++) {
-        
-        Sessions *s1 = (Sessions*)[_result objectAtIndex:i];
-        
-        printf("\n%s \n%d \n%s \n%s \n%s \n%c",[s1.name UTF8String],s1.id,[s1.descrption UTF8String],[s1.type UTF8String],[s1.location UTF8String],s1.like);
-    }
-
-    
     
 
     // Uncomment the following line to preserve selection between presentations.
@@ -113,14 +105,25 @@
     // Configure the cell...
     
     Sessions *s = (Sessions*)[_result objectAtIndex:indexPath.row];
-    NSMutableString *date = [[NSMutableString alloc]initWithFormat:@"%f -",s.startDate];
-    [date appendString:[[NSMutableString alloc]initWithFormat:@" %f",s.endDate]];
     
-    printf("\n%s \n%d of %d \n%s \n%s \n%s \n%c",[s.name UTF8String],indexPath.row,_result.count,[s.descrption UTF8String],[s.type UTF8String],[s.location UTF8String],s.like);
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"HH:mm"];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Africa/Cairo"]];
+    
+//    NSDate *d1 = [NSDate dateWithTimeIntervalSince1970:s.startDate];
+//    NSString *str1 = [formatter stringFromDate:d1];
+//    
+//    
+//    NSDate *d2 = [NSDate dateWithTimeIntervalSince1970:s.endDate];
+//    NSString *str2 = [formatter stringFromDate:d2];
+//    
+//    NSMutableString *date = [[NSMutableString alloc]initWithFormat:@"%@ - %@",str1,str2];
+    
+//    printf("\n%s \n%d of %d \n%s \n%s \n%s \n%f",[str1 UTF8String],indexPath.row,_result.count,[str2 UTF8String],[s.type UTF8String],[s.location UTF8String],s.startDate);
     
     [(UILabel*)[cell viewWithTag:1] setText:s.name];
     [(UILabel*)[cell viewWithTag:2] setText:s.location];
-    [(UILabel*)[cell viewWithTag:3] setText:date];
+//    [(UILabel*)[cell viewWithTag:3] setText:date];
     [(UIImageView*)[cell viewWithTag:4] setImage:[UIImage imageNamed:@"m.png"]];
     
     return cell;

@@ -30,7 +30,8 @@
 		D19360B81CB2E766003166FB /* Exhiptors.m in Sources */ = {isa = PBXBuildFile; fileRef = D19360B71CB2E766003166FB /* Exhiptors.m */; };
 		D19360BB1CB2E767003166FB /* PhonesOfExhiptors.m in Sources */ = {isa = PBXBuildFile; fileRef = D19360BA1CB2E767003166FB /* PhonesOfExhiptors.m */; };
 		D19360BE1CB2E768003166FB /* MobilesOfExhiptors.m in Sources */ = {isa = PBXBuildFile; fileRef = D19360BD1CB2E768003166FB /* MobilesOfExhiptors.m */; };
-		D19360C41CB2EC29003166FB /* Sessions.m in Sources */ = {isa = PBXBuildFile; fileRef = D19360C31CB2EC29003166FB /* Sessions.m */; };
+		D193D47F1CBCFAAF00BC0EC0 /* Agenda.m in Sources */ = {isa = PBXBuildFile; fileRef = D193D47E1CBCFAAF00BC0EC0 /* Agenda.m */; };
+		D193D4821CBCFAB000BC0EC0 /* Sessions.m in Sources */ = {isa = PBXBuildFile; fileRef = D193D4811CBCFAB000BC0EC0 /* Sessions.m */; };
 		D1A1DEA91CBAC0660052CDED /* UserPhones.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A1DEA81CBAC0660052CDED /* UserPhones.m */; };
 		D1A1DEAC1CBAC0670052CDED /* UserMobiles.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A1DEAB1CBAC0670052CDED /* UserMobiles.m */; };
 		D1A1DEAF1CBAC0680052CDED /* AllSpeakerPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A1DEAE1CBAC0670052CDED /* AllSpeakerPhone.m */; };
@@ -87,8 +88,10 @@
 		D19360BA1CB2E767003166FB /* PhonesOfExhiptors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhonesOfExhiptors.m; path = DBProject/PhonesOfExhiptors.m; sourceTree = "<group>"; };
 		D19360BC1CB2E768003166FB /* MobilesOfExhiptors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MobilesOfExhiptors.h; path = DBProject/MobilesOfExhiptors.h; sourceTree = "<group>"; };
 		D19360BD1CB2E768003166FB /* MobilesOfExhiptors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MobilesOfExhiptors.m; path = DBProject/MobilesOfExhiptors.m; sourceTree = "<group>"; };
-		D19360C21CB2EC29003166FB /* Sessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sessions.h; sourceTree = "<group>"; };
-		D19360C31CB2EC29003166FB /* Sessions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sessions.m; sourceTree = "<group>"; };
+		D193D47D1CBCFAAF00BC0EC0 /* Agenda.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Agenda.h; path = DBProject/Agenda.h; sourceTree = "<group>"; };
+		D193D47E1CBCFAAF00BC0EC0 /* Agenda.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Agenda.m; path = DBProject/Agenda.m; sourceTree = "<group>"; };
+		D193D4801CBCFAB000BC0EC0 /* Sessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sessions.h; path = DBProject/Sessions.h; sourceTree = "<group>"; };
+		D193D4811CBCFAB000BC0EC0 /* Sessions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Sessions.m; path = DBProject/Sessions.m; sourceTree = "<group>"; };
 		D1A1DEA71CBAC0660052CDED /* UserPhones.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPhones.h; sourceTree = "<group>"; };
 		D1A1DEA81CBAC0660052CDED /* UserPhones.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPhones.m; sourceTree = "<group>"; };
 		D1A1DEAA1CBAC0670052CDED /* UserMobiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserMobiles.h; sourceTree = "<group>"; };
@@ -148,7 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				D1B311201CB9406100FEE17A /* Other Files */,
-				D1B311161CB91A8E00FEE17A /* Agenda */,
+				D1B311161CB91A8E00FEE17A /* Agenda View */,
 				D1B311121CB90C0400FEE17A /* Main Menu */,
 				D192BA0F1CB41372003F1019 /* CoreDataManager */,
 				D19360B51CB2E3E0003166FB /* beans */,
@@ -254,6 +257,7 @@
 		D19360B51CB2E3E0003166FB /* beans */ = {
 			isa = PBXGroup;
 			children = (
+				D193D4831CBCFAFE00BC0EC0 /* Agenda */,
 				D1A1DEB91CBAC0720052CDED /* User */,
 				D1A1DEBC1CBAC1530052CDED /* Speakers */,
 				D19360C51CB2EC3E003166FB /* sessions */,
@@ -294,11 +298,20 @@
 		D19360C51CB2EC3E003166FB /* sessions */ = {
 			isa = PBXGroup;
 			children = (
+				D193D4801CBCFAB000BC0EC0 /* Sessions.h */,
+				D193D4811CBCFAB000BC0EC0 /* Sessions.m */,
 				D19360A81CB2DFEA003166FB /* speaker */,
-				D19360C21CB2EC29003166FB /* Sessions.h */,
-				D19360C31CB2EC29003166FB /* Sessions.m */,
 			);
 			name = sessions;
+			sourceTree = "<group>";
+		};
+		D193D4831CBCFAFE00BC0EC0 /* Agenda */ = {
+			isa = PBXGroup;
+			children = (
+				D193D47D1CBCFAAF00BC0EC0 /* Agenda.h */,
+				D193D47E1CBCFAAF00BC0EC0 /* Agenda.m */,
+			);
+			name = Agenda;
 			sourceTree = "<group>";
 		};
 		D1A1DEB91CBAC0720052CDED /* User */ = {
@@ -368,13 +381,13 @@
 			name = "Main Menu";
 			sourceTree = "<group>";
 		};
-		D1B311161CB91A8E00FEE17A /* Agenda */ = {
+		D1B311161CB91A8E00FEE17A /* Agenda View */ = {
 			isa = PBXGroup;
 			children = (
 				D1B3111A1CB9259A00FEE17A /* IOSAgenda.h */,
 				D1B3111B1CB9259A00FEE17A /* IOSAgenda.m */,
 			);
-			name = Agenda;
+			name = "Agenda View";
 			sourceTree = "<group>";
 		};
 		D1B311201CB9406100FEE17A /* Other Files */ = {
@@ -487,14 +500,15 @@
 			files = (
 				D1B3111C1CB9259B00FEE17A /* IOSAgenda.m in Sources */,
 				D192D2BD1CB2AC1600BEC2C5 /* IOSAppDelegate.m in Sources */,
+				D193D4821CBCFAB000BC0EC0 /* Sessions.m in Sources */,
 				D192BA0E1CB41368003F1019 /* CoreDataManager.m in Sources */,
 				D1A1DEB51CBAC0680052CDED /* AllSpeakersMobiles.m in Sources */,
 				D19360AF1CB2E15A003166FB /* PhonesOfSpeakers.m in Sources */,
 				D19360BB1CB2E767003166FB /* PhonesOfExhiptors.m in Sources */,
 				D19360B21CB2E15B003166FB /* MobilesOfSpeakers.m in Sources */,
+				D193D47F1CBCFAAF00BC0EC0 /* Agenda.m in Sources */,
 				D19360B81CB2E766003166FB /* Exhiptors.m in Sources */,
 				D192D2B91CB2AC1600BEC2C5 /* main.m in Sources */,
-				D19360C41CB2EC29003166FB /* Sessions.m in Sources */,
 				D1A1DEA91CBAC0660052CDED /* UserPhones.m in Sources */,
 				D1A1DEAF1CBAC0680052CDED /* AllSpeakerPhone.m in Sources */,
 				D19360BE1CB2E768003166FB /* MobilesOfExhiptors.m in Sources */,

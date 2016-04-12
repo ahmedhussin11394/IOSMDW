@@ -74,11 +74,14 @@
     
     session.name = @"mahmoud";
     session.location = @"Alex";
-    session.id = 1200;
+//    session.id = 1200;
     session.descrption = @"inter net of things";;
     session.type = @"Sicntific";
-    session.like = true;
+//    session.like = true;
     session.tag = @"good";
+        
+//    session.startDate = 1460620800000;
+//    session.endDate = 1460624400000;
     
     
     Speaker *speaker = [NSEntityDescription insertNewObjectForEntityForName:@"Speaker" inManagedObjectContext:_managedObjectContext];

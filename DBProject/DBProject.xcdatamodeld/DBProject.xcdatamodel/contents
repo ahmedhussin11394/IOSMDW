@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="12E55" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Agenda" representedClassName="Agenda" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="agendaSessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sessions" inverseName="agendaid" inverseEntity="Sessions" syncable="YES"/>
+    </entity>
     <entity name="AllSpeakerPhone" representedClassName="AllSpeakerPhone" syncable="YES">
         <attribute name="phonenum" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="phonessowner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AllSpeakers" inverseName="phones" inverseEntity="AllSpeakers" syncable="YES"/>
@@ -64,6 +69,7 @@
         <attribute name="startDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="agendaid" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Agenda" inverseName="agendaSessions" inverseEntity="Agenda" syncable="YES"/>
         <relationship name="speakers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Speaker" inverseName="session" inverseEntity="Speaker" syncable="YES"/>
     </entity>
     <entity name="Speaker" representedClassName="Speaker" syncable="YES">
@@ -105,18 +111,19 @@
         <relationship name="phoneOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="phones" inverseEntity="User" syncable="YES"/>
     </entity>
     <elements>
+        <element name="AllSpeakerPhone" positionX="-270" positionY="332" width="128" height="73"/>
+        <element name="AllSpeakers" positionX="-459" positionY="306" width="128" height="223"/>
+        <element name="AllSpeakersMobiles" positionX="-252" positionY="476" width="128" height="73"/>
         <element name="Exhiptors" positionX="45" positionY="-0" width="128" height="255"/>
         <element name="MobilesOfExhiptors" positionX="333" positionY="36" width="128" height="75"/>
         <element name="MobilesOfSpeakers" positionX="-101" positionY="159" width="128" height="75"/>
         <element name="PhonesOfExhiptors" positionX="304" positionY="225" width="128" height="75"/>
         <element name="PhonesOfSpeakers" positionX="-101" positionY="33" width="128" height="75"/>
-        <element name="Sessions" positionX="-27" positionY="300" width="128" height="193"/>
+        <element name="Sessions" positionX="-27" positionY="300" width="128" height="208"/>
         <element name="Speaker" positionX="-297" positionY="41" width="128" height="238"/>
-        <element name="AllSpeakers" positionX="-459" positionY="306" width="128" height="223"/>
-        <element name="AllSpeakerPhone" positionX="-270" positionY="332" width="128" height="73"/>
-        <element name="AllSpeakersMobiles" positionX="-252" positionY="476" width="128" height="73"/>
         <element name="User" positionX="-74" positionY="522" width="128" height="238"/>
-        <element name="UserPhones" positionX="142" positionY="711" width="128" height="73"/>
         <element name="UserMobiles" positionX="126" positionY="549" width="128" height="73"/>
+        <element name="UserPhones" positionX="142" positionY="711" width="128" height="73"/>
+        <element name="Agenda" positionX="304" positionY="396" width="128" height="88"/>
     </elements>
 </model>
