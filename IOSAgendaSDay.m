@@ -1,30 +1,30 @@
 //
-//  IOSAgenda.m
+//  IOSAgendaSDay.m
 //  DBProject
 //
-//  Created by Mahmoud El nagar on 4/9/16.
+//  Created by Mahmoud El nagar on 4/12/16.
 //  Copyright (c) 2016 JETS. All rights reserved.
 //
 
-#import "IOSAgenda.h"
+#import "IOSAgendaSDay.h"
 #import "Sessions.h"
 #import "Speaker.h"
 #import "MobilesOfSpeakers.h"
 #import "PhonesOfSpeakers.h"
 #import "CoreDataManager.h"
-#import "IOSSessionDetailsView.h"
 #import "Agenda.h"
 #import "NetworkClass.h"
 #import "NetworkManger.h"
-#import "Reachability.h"
+#import "IOSSessionDetailsView.h"
 
-@interface IOSAgenda ()
+@interface IOSAgendaSDay ()
 
 @end
 
-@implementation IOSAgenda{
+@implementation IOSAgendaSDay{
     int i ;
 }
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -35,19 +35,20 @@
     return self;
 }
 
-- (void)dataRecived:(NSMutableArray *) data{
-    if (data != nil) {
-        _result = [NSMutableArray new];
-    }
-    for (int b = 0; b <[data count]; b++) {
-//        printf("object from  %d count %d\n",b,[[[data[b] agendaSessions] allObjects] count]);
-        [_result addObjectsFromArray:[[data[b] agendaSessions] allObjects]];
-    }
-    
-    if (_result != nil) {
-        [self.tableView reloadData];
-    }
-}
+//- (void)dataRecived:(NSMutableArray *) data{
+//    if (data != nil) {
+//        _result = [NSMutableArray new];
+//    }
+//
+//    [_result addObjectsFromArray:[[data[1] agendaSessions] allObjects]];
+//
+//    
+//    if (_result != nil) {
+//        [self.tableView reloadData];
+//    }
+//
+//
+//}
 
 - (void)viewDidLoad
 {
@@ -55,35 +56,26 @@
     
     self.automaticallyAdjustsScrollViewInsets = YES;
     
+//    NetworkManger *manager = [NetworkManger new];
+//    NetworkClass *c = [manager getNetworkInstance];
+//    [c setMyDelegate:self];
+//    [c getSessions];
     
-    Reachability *reach = [Reachability reachabilityWithHostName:@"www.google.com"];
-    NetworkStatus status = [reach currentReachabilityStatus];
-    if (status == NotReachable) {
-        printf("\nNotReachable\n");
+    
         CoreDataManager *core = [CoreDataManager new];
         NSMutableArray *agendas = [core fetchEntitiesWithClassName:@"Agenda" sortDescriptors:nil predicate:nil];
         _result = [NSMutableArray new];
-        
-        for (int b = 0; b <[agendas count]; b++) {
-            [_result addObjectsFromArray:[[agendas[b] agendaSessions] allObjects]];
+        if (agendas.count>0) {
+            [_result addObjectsFromArray:[[agendas[1] agendaSessions] allObjects]];
         }
-    } else {
-        printf("\nConnected\n");
-        NetworkManger *manager = [NetworkManger new];
-        NetworkClass *c = [manager getNetworkInstance];
-        [c setMyDelegate:self];
-        [c getSessions];
-    }
     
     i = 0;
     _icons = [NSMutableArray new];
     
+
     [_icons addObject:[UIImage imageNamed:@"first.png"]];
     [_icons addObject:[UIImage imageNamed:@"second.png"]];
     [_icons addObject:[UIImage imageNamed:@"third.png"]];
-    
-    
-    
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -92,14 +84,35 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-
 -(void)viewDidAppear:(BOOL)animated{
     
 //    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
     [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]]];
-    [self.tabBarController.tabBar setBackgroundColor:[UIColor redColor]];
+    //
+    //    for (int i = 0; i<_result.count; i++) {
+    //
+    //        Sessions *s1 = (Sessions*)[_result objectAtIndex:i];
+    //
+    //        printf("\n%s \n%d \n%s \n%s \n%s \n%c",[s1.name UTF8String],s1.id,[s1.descrption UTF8String],[s1.type UTF8String],[s1.location UTF8String],s1.like);
+    //    }
+    //
+    
+    
+    
+    
+    
+    //            for (Speaker *sp  in s.speakers) {
+    //                printf("\nuser speaker name %s %s",[[sp fristName]UTF8String],[[sp lastName]UTF8String]);
+    //
+    //                for (MobilesOfSpeakers *mobile in sp.mobiles) {
+    //                    printf("\nuser mobiles num %s ",[[mobile mobilenum] UTF8String]);
+    //                }
+    //
+    //                for (PhonesOfSpeakers *phone in sp.phones) {
+    //                    printf("\nuser phones num %s ",[[phone phonenum] UTF8String]);
+    //                }
+    //            }
 }
-
 
 
 - (void)didReceiveMemoryWarning
@@ -124,10 +137,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"agendaCell";
+    static NSString *CellIdentifier = @"agendaSCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+    
     
     Sessions *s = (Sessions*)[_result objectAtIndex:indexPath.row];
     
@@ -144,29 +158,22 @@
     
     NSMutableString *date = [[NSMutableString alloc]initWithFormat:@"%@ - %@",str1,str2];
     
-
+    //    printf("\n%s \n%d of %d \n%s \n%s \n%s \n%f",[str1 UTF8String],indexPath.row,_result.count,[str2 UTF8String],[s.type UTF8String],[s.location UTF8String],s.startDate);
     
     [(UILabel*)[cell viewWithTag:1] setText:s.name];
     UILabel * l = (UILabel*)[cell viewWithTag:2];
-    l.font = [UIFont fontWithName:@"Arial" size:14.0f];
+    l.font = [UIFont fontWithName:@"Monotype Corsiva" size:14.0f];
     [l setText:s.location];
     [(UILabel*)[cell viewWithTag:3] setText:date];
-    
     cell.imageView.image = _icons[i];
     if (i==2) {
         i=0;
     }else{
         i++;
     }
+    
     return cell;
 }
-
-
-//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    [self performSegueWithIdentifier:@"move" sender:indexPath];
-//}
-
-
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *head = [[UIView alloc] initWithFrame:CGRectMake(50, 0, tableView.frame.size.width, 100.0)];
@@ -174,15 +181,16 @@
     head.bounds  =CGRectMake(50, 50, 50, 50);
     
     
-//    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, tableView.frame.size.width, 25.0)];
-//    lab.backgroundColor = [UIColor clearColor];
-//    lab.font = [UIFont fontWithName:@"Verdana" size:20.0];
-//    lab.textAlignment = NSTextAlignmentCenter;
-//    lab.text = @"MDW Agenda";
-//    [head addSubview:lab];
+    //    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, tableView.frame.size.width, 25.0)];
+    //    lab.backgroundColor = [UIColor clearColor];
+    //    lab.font = [UIFont fontWithName:@"Verdana" size:20.0];
+    //    lab.textAlignment = NSTextAlignmentCenter;
+    //    lab.text = @"MDW Agenda";
+    //    [head addSubview:lab];
     
     return head;
 }
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -233,9 +241,9 @@
         NSIndexPath *index = [self.tableView indexPathForCell:sender];
         details.session = [_result objectAtIndex:index.row];
     }
-    
+
 }
 
-
+ 
 
 @end

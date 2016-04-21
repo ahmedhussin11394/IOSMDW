@@ -11,6 +11,7 @@
 #import "Sessions.h"
 #import "Speaker.h"
 #import "MobilesOfSpeakers.h"
+#import "Agenda.h"
 #import "PhonesOfSpeakers.h"
 #import "CoreDataManager.h"
 
@@ -63,55 +64,54 @@
     [core trunkateEntity:@"PhonesOfSpeakers"];
     [core trunkateEntity:@"MobilesOfSpeakers"];
     [core trunkateEntity:@"Speaker"];
-    
+    [core trunkateEntity:@"Agenda"];
     
     
     //refilling tables with data
+    for (int a = 0; a<3; a++) {
+        Agenda *agenda = [NSEntityDescription insertNewObjectForEntityForName:@"Agenda" inManagedObjectContext:_managedObjectContext];
     
-    for (int i = 0; i<5; i++) {
+        for (int i = 0; i<5; i++) {
         
-    Sessions *session = [NSEntityDescription insertNewObjectForEntityForName:@"Sessions" inManagedObjectContext:_managedObjectContext];
+            Sessions *session = [NSEntityDescription insertNewObjectForEntityForName:@"Sessions" inManagedObjectContext:_managedObjectContext];
     
-    session.name = @"mahmoud";
-    session.location = @"Alex";
-//    session.id = 1200;
-    session.descrption = @"inter net of things";;
-    session.type = @"Sicntific";
-//    session.like = true;
-    session.tag = @"good";
+            session.name = @"mahmoud";
+            session.location = @"Alex";
+//          session.id = 1200;
+            session.descrption = @"inter net of things";;
+            session.type = @"Sicntific";
+//          session.like = true;
+            session.tag = @"good";
         
-//    session.startDate = 1460620800000;
-//    session.endDate = 1460624400000;
+            session.startDate = [NSDate dateWithTimeIntervalSince1970:1460620800000];
+            session.endDate = [NSDate dateWithTimeIntervalSince1970:1460624400000];
     
     
-    Speaker *speaker = [NSEntityDescription insertNewObjectForEntityForName:@"Speaker" inManagedObjectContext:_managedObjectContext];
-    speaker.id = i+1;
-    speaker.gender = true;
-    speaker.imgurl = @"http";
-    speaker.middleName = @"mahmoud";
-    speaker.biography = @"speaker";
-    speaker.fristName = @"ahmed";
-    speaker.lastName = @"elnagar";
-    speaker.companyName = @"oracle";
-    speaker.title = @"intro";
+            Speaker *speaker = [NSEntityDescription insertNewObjectForEntityForName:@"Speaker" inManagedObjectContext:_managedObjectContext];
+            speaker.id = i+1;
+            speaker.gender = true;
+            speaker.imgurl = @"http";
+            speaker.middleName = @"mahmoud";
+            speaker.biography = @"speaker";
+            speaker.fristName = @"ahmed";
+            speaker.lastName = @"elnagar";
+            speaker.companyName = @"oracle";
+            speaker.title = @"intro";
     
-    MobilesOfSpeakers *m = [NSEntityDescription insertNewObjectForEntityForName:@"MobilesOfSpeakers" inManagedObjectContext:_managedObjectContext];
-    [m setMobilenum:@"01203265"];
+            MobilesOfSpeakers *m = [NSEntityDescription insertNewObjectForEntityForName:@"MobilesOfSpeakers" inManagedObjectContext:_managedObjectContext];
+            [m setMobilenum:@"01203265"];
     
-    MobilesOfSpeakers *m1 = [NSEntityDescription insertNewObjectForEntityForName:@"MobilesOfSpeakers" inManagedObjectContext:_managedObjectContext];
-    [m1 setMobilenum:@"010352369"];
-    
-    
-    PhonesOfSpeakers *p = [NSEntityDescription insertNewObjectForEntityForName:@"PhonesOfSpeakers" inManagedObjectContext:_managedObjectContext];
-    [p setPhonenum:@"0456982365"];
-    PhonesOfSpeakers *p1 = [NSEntityDescription insertNewObjectForEntityForName:@"PhonesOfSpeakers" inManagedObjectContext:_managedObjectContext];
-    [p1 setPhonenum:@"0103265"];
-    
-    [speaker addMobiles:[NSSet setWithObjects:m,m1, nil]];
-    [speaker addPhones:[NSSet setWithObjects:p,p1, nil]];
+            MobilesOfSpeakers *m1 = [NSEntityDescription insertNewObjectForEntityForName:@"MobilesOfSpeakers" inManagedObjectContext:_managedObjectContext];
+            [m1 setMobilenum:@"010352369"];
     
     
+            PhonesOfSpeakers *p = [NSEntityDescription insertNewObjectForEntityForName:@"PhonesOfSpeakers" inManagedObjectContext:_managedObjectContext];
+            [p setPhonenum:@"0456982365"];
+            PhonesOfSpeakers *p1 = [NSEntityDescription insertNewObjectForEntityForName:@"PhonesOfSpeakers" inManagedObjectContext:_managedObjectContext];
+            [p1 setPhonenum:@"0103265"];
     
+            [speaker addMobiles:[NSSet setWithObjects:m,m1, nil]];
+            [speaker addPhones:[NSSet setWithObjects:p,p1, nil]];
     
     
     
@@ -121,36 +121,39 @@
     
     
     
-    Speaker *speaker1 = [NSEntityDescription insertNewObjectForEntityForName:@"Speaker" inManagedObjectContext:_managedObjectContext];
-    speaker1.id = i+1;
-    speaker1.gender = true;
-    speaker1.imgurl = @"http";
-    speaker1.middleName = @"adel";
-    speaker1.biography = @"speaker";
-    speaker1.fristName = @"mona";
-    speaker1.lastName = @"rabe3";
-    speaker1.companyName = @"oracle";
-    speaker1.title = @"intro";
-    
-    MobilesOfSpeakers *m2 = [NSEntityDescription insertNewObjectForEntityForName:@"MobilesOfSpeakers" inManagedObjectContext:_managedObjectContext];
-    [m2 setMobilenum:@"01203265"];
-    
-    MobilesOfSpeakers *m3 = [NSEntityDescription insertNewObjectForEntityForName:@"MobilesOfSpeakers" inManagedObjectContext:_managedObjectContext];
-    [m3 setMobilenum:@"010352369"];
     
     
-    PhonesOfSpeakers *p2 = [NSEntityDescription insertNewObjectForEntityForName:@"PhonesOfSpeakers" inManagedObjectContext:_managedObjectContext];
-    [p2 setPhonenum:@"0456982365"];
-    PhonesOfSpeakers *p3 = [NSEntityDescription insertNewObjectForEntityForName:@"PhonesOfSpeakers" inManagedObjectContext:_managedObjectContext];
-    [p3 setPhonenum:@"0103265"];
     
-    [speaker1 addMobiles:[NSSet setWithObjects:m2,m3, nil]];
-    [speaker1 addPhones:[NSSet setWithObjects:p2,p3, nil]];
+            Speaker *speaker1 = [NSEntityDescription insertNewObjectForEntityForName:@"Speaker" inManagedObjectContext:_managedObjectContext];
+            speaker1.id = i+1;
+            speaker1.gender = true;
+            speaker1.imgurl = @"http";
+            speaker1.middleName = @"adel";
+            speaker1.biography = @"speaker";
+            speaker1.fristName = @"mona";
+            speaker1.lastName = @"rabe3";
+            speaker1.companyName = @"oracle";
+            speaker1.title = @"intro";
     
-    [session addSpeakers:[NSSet setWithObjects:speaker1,speaker, nil]];
+            MobilesOfSpeakers *m2 = [NSEntityDescription insertNewObjectForEntityForName:@"MobilesOfSpeakers" inManagedObjectContext:_managedObjectContext];
+            [m2 setMobilenum:@"01203265"];
     
-    NSError *error = nil;
-    [core insertModelError:&error];
+            MobilesOfSpeakers *m3 = [NSEntityDescription insertNewObjectForEntityForName:@"MobilesOfSpeakers" inManagedObjectContext:_managedObjectContext];
+            [m3 setMobilenum:@"010352369"];
+    
+    
+            PhonesOfSpeakers *p2 = [NSEntityDescription insertNewObjectForEntityForName:@"PhonesOfSpeakers" inManagedObjectContext:_managedObjectContext];
+            [p2 setPhonenum:@"0456982365"];
+            PhonesOfSpeakers *p3 = [NSEntityDescription insertNewObjectForEntityForName:@"PhonesOfSpeakers" inManagedObjectContext:_managedObjectContext];
+            [p3 setPhonenum:@"0103265"];
+    
+            [speaker1 addMobiles:[NSSet setWithObjects:m2,m3, nil]];
+            [speaker1 addPhones:[NSSet setWithObjects:p2,p3, nil]];
+    
+            [session addSpeakers:[NSSet setWithObjects:speaker1,speaker, nil]];
+            [agenda addAgendaSessionsObject:session];
+            [core saveManagedObject];
+        }
     }
 }
 

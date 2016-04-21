@@ -59,10 +59,11 @@ static CoreDataManager *coreDataManager;
     
 }
 
--(void)insertModelError:(NSError **)error
+-(void)saveManagedObject
 {
     // Save the context.
-    if(![_managedObjectContext save:error]){
+    NSError *error = nil;
+    if(![_managedObjectContext save:&error]){
         
     }
     
@@ -86,9 +87,6 @@ static CoreDataManager *coreDataManager;
     
     NSError *error =nil;
     NSMutableArray *result = [[_managedObjectContext executeFetchRequest:fetchRequest error:&error]mutableCopy];
-
-    printf("\ncore data session count is %d name test\n",result.count);
-    
     return result;
 }
 

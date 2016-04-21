@@ -12,9 +12,16 @@
 #import "Sessions.h"
 #import "Exhiptors.h"
 #import "User.h"
+#import "CoreDataManager.h"
+#import "Speaker.h"
+#import "MobilesOfSpeakers.h"
+#import "PhonesOfSpeakers.h"
+
 @implementation NetworkClass{
      NSDictionary *dictionary;
 }
+@synthesize managedObjectContext = _managedObjectContext;
+
 
 - (NSDictionary *)getSpeakers{
     // 1
@@ -32,7 +39,7 @@
         
         // 3
        
-         dictionary= (NSDictionary *)responseObject;
+        dictionary= (NSDictionary *)responseObject;
         NSLog([dictionary objectForKey:@"status"]);
         [_myDelegate dataRecived:dictionary];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -53,42 +60,66 @@
 }
 
 - (void)getSessions{
-    NSString *string = @"http://www.mobiledeveloperweekend.net/MDW/service/getSessions?userName=eng.medhat.cs.h@gmail.com";
+    CoreDataManager *core = [CoreDataManager new];
+    _managedObjectContext = core.managedObjectContext;
+    
+    
+    
+    //trunkate tables before re filling
+    [core trunkateEntity:@"PhonesOfSpeakers"];
+    [core trunkateEntity:@"MobilesOfSpeakers"];
+    [core trunkateEntity:@"Speaker"];
+    [core trunkateEntity:@"Sessions"];
+    [core trunkateEntity:@"Agenda"];
+
+    NSString *string = @"http://www.mobiledeveloperweekend.net/service/getSessions?userName=eng.medhat.cs.h@gmail.com";
     
     dictionary=[NSDictionary new];
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     // 2
+
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         // 3
-        
+        printf("\nkeda ahmed gab data  %d \n",2);
+
         dictionary= (NSDictionary *)responseObject;
         NSDictionary *dicOfResult = [dictionary objectForKey:@"result"];
         NSMutableArray *agendas=[dicOfResult objectForKey:@"agendas"];
         NSMutableArray *arrayOfAgendas=[NSMutableArray new];
-       
-        for (int i=0; i<[agendas count]; i++) {
+        NSMutableArray *arrayOfSessions=[NSMutableArray new];
+
+
+        for (int x=0; x<[agendas count]; x++) {
             
-            NSMutableDictionary *agendaDict = [agendas objectAtIndex:i];
-            Agenda *agenda=[Agenda new];
+            NSMutableDictionary *agendaDict = [agendas objectAtIndex:x];
+            
+            Agenda *agenda= [NSEntityDescription insertNewObjectForEntityForName:@"Agenda" inManagedObjectContext:_managedObjectContext];
+            
             NSString *dateString=[agendaDict objectForKey:@"date"];
+            
             double getDate=[dateString doubleValue];
             NSTimeInterval seconds = getDate / 1000;
             NSDate *date = [NSDate dateWithTimeIntervalSince1970:seconds];
             [agenda setDate:date];
             NSMutableArray *unParsedSessions=[NSMutableArray new];
             unParsedSessions=[agendaDict objectForKey:@"sessions"];
-            NSMutableArray *arrayOfSessions=[NSMutableArray new];
+            
+
             for (int i=0; i<[unParsedSessions count]; i++) {
                 NSMutableDictionary *sessionDict = [unParsedSessions objectAtIndex:i];
-                Sessions *session=[Sessions new];
+                
+                Sessions *session= [NSEntityDescription insertNewObjectForEntityForName:@"Sessions" inManagedObjectContext:_managedObjectContext];
+                
+                printf("\nparse json  %d %d \n",x,i);
+                
                 [session setName:[sessionDict objectForKey:@"name"]];
-                [session setId:[[sessionDict objectForKey:@"id"] numberFromString:[sessionDict objectForKey:@"id"]]];
+//                [session setId:[[sessionDict objectForKey:@"id"] numberFromString:[sessionDict objectForKey:@"id"]]];
                 [session setDescrption:[sessionDict objectForKey:@"description"]];
                 [session setType:[sessionDict objectForKey:@"sessionType"]];
                 if([[sessionDict objectForKey:@"like"] isEqualToString:@"true"])
@@ -99,8 +130,8 @@
                     [session setLike:0];
                 }
                 
-                [session setTag:[sessionDict objectForKey:@"sessionTags"]];
-                [session setSpeakers:[sessionDict objectForKey:@"speakers"]];
+//                [session setTag:[sessionDict objectForKey:@"sessionTags"]];
+                [session setLocation:[sessionDict objectForKey:@"location"]];
                 dateString=[sessionDict objectForKey:@"startDate"];
                 getDate=[dateString doubleValue];
                 seconds = getDate / 1000;
@@ -111,13 +142,67 @@
                 seconds = getDate / 1000;
                 date = [NSDate dateWithTimeIntervalSince1970:seconds];
                 [session setEndDate:date];
+                
+                
+                NSMutableArray *speakers=[sessionDict objectForKey:@"speakers"];
+                if ((id)speakers != [NSNull null]) {
+                    NSMutableArray *sp = [NSMutableArray new];
+                    for (int a = 0; a<speakers.count; a++) {
+                        NSMutableDictionary *speakerDict = [speakers objectAtIndex:a];
+                        
+                        Speaker *speaker = [NSEntityDescription insertNewObjectForEntityForName:@"Speaker" inManagedObjectContext:_managedObjectContext];
+//                       [speaker setId:[[speakerDict objectForKey:@"id"]numberFromString:[speakerDict objectForKey:@"id"]]];
+                        [speaker setGender:(Boolean)[speakerDict objectForKey:@"gender"]];
+
+                        speaker.imgurl = [speakerDict objectForKey:@"imageURL"];
+                        speaker.middleName = [speakerDict objectForKey:@"middleName"];
+                        speaker.biography = [speakerDict objectForKey:@"biography"];
+                        speaker.fristName = [speakerDict objectForKey:@"firstName"];
+                        speaker.lastName = [speakerDict objectForKey:@"lastName"];
+                        speaker.companyName = [speakerDict objectForKey:@"companyName"];
+                        speaker.title = [speakerDict objectForKey:@"title"];
+                        
+                        //                    MobilesOfSpeakers *m = [NSEntityDescription insertNewObjectForEntityForName:@"MobilesOfSpeakers" inManagedObjectContext:_managedObjectContext];
+                        //                    [m setMobilenum:@"01203265"];
+                        //
+                        //                    MobilesOfSpeakers *m1 = [NSEntityDescription insertNewObjectForEntityForName:@"MobilesOfSpeakers" inManagedObjectContext:_managedObjectContext];
+                        //                    [m1 setMobilenum:@"010352369"];
+                        //
+                        //
+                        //                    PhonesOfSpeakers *p = [NSEntityDescription insertNewObjectForEntityForName:@"PhonesOfSpeakers" inManagedObjectContext:_managedObjectContext];
+                        //                    [p setPhonenum:@"0456982365"];
+                        //                    PhonesOfSpeakers *p1 = [NSEntityDescription insertNewObjectForEntityForName:@"PhonesOfSpeakers" inManagedObjectContext:_managedObjectContext];
+                        //                    [p1 setPhonenum:@"0103265"];
+                        //                    
+                        //                    [speaker addMobiles:[NSSet setWithObjects:m,m1, nil]];
+                        //                    [speaker addPhones:[NSSet setWithObjects:p,p1, nil]];
+                        
+                        [core saveManagedObject];
+                        [sp addObject:speaker];
+                    }
+                    session.speakers = [NSSet setWithArray:sp];
+                    [core saveManagedObject];
+                    
+                }
+                
+                
+                
+                
+                
+                
+                
+//                NSMutableArray *a = [NSMutableArray new];
+//                [a addObject:speaker];
+//                session.speakers = [NSSet setWithArray:a];
                 [arrayOfSessions addObject:session];
+                [agenda addAgendaSessionsObject:session];
+                [core saveManagedObject];
+                
             }
-            
-            [agenda setAgendaSessions:arrayOfSessions];
             [arrayOfAgendas addObject:agenda];
         }
-        
+//        [core saveManagedObject];
+
         [_myDelegate dataRecived:arrayOfAgendas];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -137,7 +222,7 @@
 
 -(void)getExhiptors{
     // 1
-    NSString *string = @"http://www.mobiledeveloperweekend.net/MDW/service/getExhibitors?userName=eng.medhat.cs.h@gmail.com";
+    NSString *string = @"http://www.mobiledeveloperweekend.net/service/getExhibitors?userName=eng.medhat.cs.h@gmail.com";
     printf("ahmed__");
     dictionary=[NSDictionary new];
     NSURL *url = [NSURL URLWithString:string];

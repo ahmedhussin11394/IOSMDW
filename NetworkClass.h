@@ -10,6 +10,8 @@
 #import "NetworkDelegate.h"
 #import "User.h"
 @interface NetworkClass : NSObject
+@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
 @property id<NetworkDelegate> myDelegate;
 - (NSDictionary *)getSpeakers;
 - (void)getSessions;

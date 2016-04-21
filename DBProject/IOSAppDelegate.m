@@ -7,6 +7,8 @@
 //
 
 #import "IOSAppDelegate.h"
+#import "SlideNavigationController.h"
+#import "RightMenuViewController.h"
 
 @implementation IOSAppDelegate
 
@@ -20,6 +22,36 @@
 //    // Override point for customization after application launch.
 //    self.window.backgroundColor = [UIColor whiteColor];
 //    [self.window makeKeyAndVisible];
+    
+    //---------- Start of Right Side Menu-----------
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle: nil];
+    
+    RightMenuViewController *rightMenu = (RightMenuViewController*)[mainStoryboard instantiateViewControllerWithIdentifier: @"RightMenuViewController"];
+    
+    [SlideNavigationController sharedInstance].rightMenu = rightMenu;
+    [SlideNavigationController sharedInstance].menuRevealAnimationDuration = .18;
+    
+    // Creating a custom bar button for right menu
+    UIButton *button  = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [button setImage:[UIImage imageNamed:@"menu-button"] forState:UIControlStateNormal];
+    [button addTarget:[SlideNavigationController sharedInstance] action:@selector(toggleRightMenu) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    [SlideNavigationController sharedInstance].rightBarButtonItem = rightBarButtonItem;
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:SlideNavigationControllerDidClose object:nil queue:nil usingBlock:^(NSNotification *note) {
+        NSString *menu = note.userInfo[@"menu"];
+        NSLog(@"Closed %@", menu);
+    }];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:SlideNavigationControllerDidOpen object:nil queue:nil usingBlock:^(NSNotification *note) {
+        NSString *menu = note.userInfo[@"menu"];
+        NSLog(@"Opened %@", menu);
+    }];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:SlideNavigationControllerDidReveal object:nil queue:nil usingBlock:^(NSNotification *note) {
+        NSString *menu = note.userInfo[@"menu"];
+        NSLog(@"Revealed %@", menu);
+    }];
     return YES;
 }
 

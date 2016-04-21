@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "User.h"
 @protocol NetworkDelegate <NSObject>
+@optional
 - (void)dataRecived:(NSMutableArray *) data;
 - (void)setUser:(User *) user;
 @end

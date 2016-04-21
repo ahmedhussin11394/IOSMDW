@@ -13,7 +13,7 @@
 
 + (CoreDataManager *)sharedManager;
 
--(void)insertModelError:(NSError **)error;
+-(void)saveManagedObject;
 
 - (NSMutableArray *)fetchEntitiesWithClassName:(NSString *)className
                                            sortDescriptors:(NSArray *)sortDescriptors
