@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "NetworkDelegate.h"
+#import "SlideNavigationController.h"
 
 @interface IOSAgenda : UITableViewController<NetworkDelegate>
 
 @property(strong , nonatomic) NSMutableArray *result;
-@property(strong , nonatomic) NSMutableArray *icons;
 
+@property (weak, nonatomic) IBOutlet UILabel *spaceLabel;
+
+@property Boolean flag;
 @end

@@ -12,6 +12,5 @@
 @interface IOSViewAgendaFDay : UITableViewController<NetworkDelegate>
 
 @property(strong , nonatomic) NSMutableArray *result;
-@property(strong , nonatomic) NSMutableArray *icons;
 
 @end

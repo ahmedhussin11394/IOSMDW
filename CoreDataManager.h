@@ -22,4 +22,5 @@
 
 - (void)trunkateEntity:(NSString *)entityName;
 
+
 @end

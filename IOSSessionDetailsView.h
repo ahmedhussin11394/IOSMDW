@@ -12,6 +12,7 @@
 @interface IOSSessionDetailsView : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (strong , nonatomic) Sessions *session;
+@property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 
 @property (strong, nonatomic) IBOutlet UILabel *sessionName;
 @property (strong, nonatomic) IBOutlet UILabel *sessionTime;
@@ -19,7 +20,5 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *location;
 @property (strong, nonatomic) IBOutlet UITableView *speakersTableView;
-@property (strong, nonatomic) IBOutlet UIButton *starBtn;
-@property (strong, nonatomic) IBOutlet UITableViewCell *spcell;
 
 @end

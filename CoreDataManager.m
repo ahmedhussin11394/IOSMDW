@@ -72,7 +72,6 @@ static CoreDataManager *coreDataManager;
 - (NSMutableArray *)fetchEntitiesWithClassName:(NSString *)className
     sortDescriptors:(NSArray *)sortDescriptors
     predicate:(NSPredicate *)predicate
-
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:className
@@ -81,14 +80,11 @@ static CoreDataManager *coreDataManager;
     fetchRequest.sortDescriptors = sortDescriptors;
     fetchRequest.predicate = predicate;
     
-    
-    
-    
-    
     NSError *error =nil;
     NSMutableArray *result = [[_managedObjectContext executeFetchRequest:fetchRequest error:&error]mutableCopy];
     return result;
 }
+
 
 - (void)deleteEntity:(NSManagedObject *)entity
 {
@@ -113,5 +109,6 @@ static CoreDataManager *coreDataManager;
     }
     
 }
+
 
 @end

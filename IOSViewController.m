@@ -7,7 +7,7 @@
 //
 
 #import "IOSViewController.h"
-
+#import "IOSAgenda.h"
 @interface IOSViewController ()
 
 @end
@@ -17,6 +17,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
+    self.navigationItem.hidesBackButton = YES;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,12 +28,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
+
 #pragma mark - SlideNavigationController Methods -
 
-- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
-{
-    return YES;
-}
+
 
 - (BOOL)slideNavigationControllerShouldDisplayRightMenu
 {
@@ -44,5 +48,19 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+- (void) doAction {
+    IOSAgenda *myagend=[[self viewControllers] objectAtIndex:0];
+    [myagend setFlag:true];
+    printf("when la");
+}
+
+- (void) doActionWithReload {
+    IOSAgenda *myagend=[[self viewControllers] objectAtIndex:0];
+    [myagend setFlag:true];
+    [myagend viewDidLoad];
+    printf("when reload");
+}
 
 @end

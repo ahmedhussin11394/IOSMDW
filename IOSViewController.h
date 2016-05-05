@@ -10,5 +10,6 @@
 #import "SlideNavigationController.h"
 
 @interface IOSViewController : UITabBarController<SlideNavigationControllerDelegate>
-
+- (void) doAction;
+- (void) doActionWithReload;
 @end

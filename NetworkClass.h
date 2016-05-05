@@ -10,10 +10,12 @@
 #import "NetworkDelegate.h"
 #import "User.h"
 @interface NetworkClass : NSObject
+
+@property (strong , nonatomic) NSString *sharedUserEmail;
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @property id<NetworkDelegate> myDelegate;
-- (NSDictionary *)getSpeakers;
+- (void)getSpeakers;
 - (void)getSessions;
 -(void)getExhiptors;
 -(void)loginWithName:(NSString *)name andPassword:(NSString *)pass;

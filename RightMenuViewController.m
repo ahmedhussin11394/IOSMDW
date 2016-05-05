@@ -7,10 +7,12 @@
 //
 
 #import "RightMenuViewController.h"
-
+#import "IOSAgenda.h"
+#import "IOSViewController.h"
 @implementation RightMenuViewController
 {
     NSArray *images;
+    NSUserDefaults *def;
 }
 
 
@@ -114,31 +116,42 @@
                                                              bundle: nil];
     
     UIViewController *vc ;
-    
+    IOSViewController *mytabView;
     switch (indexPath.row)
     {
         case 0:
-            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"IOSAgenda"];
+            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"UITabBarController"];
             break;
             
         case 1:
-            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"IOSAgenda"];
+            mytabView = [mainStoryboard instantiateViewControllerWithIdentifier: @"UITabBarController"];
+            //[self.navigationController presentedViewController]
+            if(![self.navigationController.presentedViewController isEqual:mytabView]) {
+                [mytabView doAction];
+            }else{
+                [mytabView doActionWithReload];
+            }
+            [[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:mytabView withSlideOutAnimation:YES andCompletion:nil];
+            return;
             break;
             
         case 2:
-            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"IOSAgenda"];
+            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"Speakers"];
             break;
             
         case 3:
-            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"IOSAgenda"];
+            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"Exhiptors"];
             break;
             
         case 4:
-            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"IOSAgenda"];
+            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"profileVC"];
             break;
             
         case 5:
-            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"IOSAgenda"];
+            def = [NSUserDefaults standardUserDefaults];
+            [def setObject:@"" forKey:@"userEmail"];
+            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"Login"];
+//            [self presentViewController:vc animated:YES completion:nil];
             break;
     }
     

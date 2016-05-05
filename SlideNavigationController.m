@@ -22,7 +22,9 @@ typedef enum {
 @property (nonatomic, assign) BOOL menuNeedsLayout;
 @end
 
-@implementation SlideNavigationController
+@implementation SlideNavigationController{
+    NSUserDefaults *def;
+}
 
 NSString * const SlideNavigationControllerDidOpen = @"SlideNavigationControllerDidOpen";
 NSString * const SlideNavigationControllerDidClose = @"SlideNavigationControllerDidClose";

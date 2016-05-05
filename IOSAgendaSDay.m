@@ -16,13 +16,15 @@
 #import "NetworkClass.h"
 #import "NetworkManger.h"
 #import "IOSSessionDetailsView.h"
+#import "IOSTableViewCell.h"
+#import "IOSSortingArray.h"
 
 @interface IOSAgendaSDay ()
 
 @end
 
 @implementation IOSAgendaSDay{
-    int i ;
+    IOSSortingArray *sort;
 }
 
 
@@ -35,20 +37,6 @@
     return self;
 }
 
-//- (void)dataRecived:(NSMutableArray *) data{
-//    if (data != nil) {
-//        _result = [NSMutableArray new];
-//    }
-//
-//    [_result addObjectsFromArray:[[data[1] agendaSessions] allObjects]];
-//
-//    
-//    if (_result != nil) {
-//        [self.tableView reloadData];
-//    }
-//
-//
-//}
 
 - (void)viewDidLoad
 {
@@ -56,10 +44,9 @@
     
     self.automaticallyAdjustsScrollViewInsets = YES;
     
-//    NetworkManger *manager = [NetworkManger new];
-//    NetworkClass *c = [manager getNetworkInstance];
-//    [c setMyDelegate:self];
-//    [c getSessions];
+
+    sort = [IOSSortingArray new];
+
     
     
         CoreDataManager *core = [CoreDataManager new];
@@ -67,52 +54,15 @@
         _result = [NSMutableArray new];
         if (agendas.count>0) {
             [_result addObjectsFromArray:[[agendas[1] agendaSessions] allObjects]];
+            _result = [sort sortingArray:_result key:@"startDate" endDate:@"endDate"];
         }
-    
-    i = 0;
-    _icons = [NSMutableArray new];
-    
-
-    [_icons addObject:[UIImage imageNamed:@"first.png"]];
-    [_icons addObject:[UIImage imageNamed:@"second.png"]];
-    [_icons addObject:[UIImage imageNamed:@"third.png"]];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
+    }
 
 -(void)viewDidAppear:(BOOL)animated{
     
 //    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
-    [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]]];
-    //
-    //    for (int i = 0; i<_result.count; i++) {
-    //
-    //        Sessions *s1 = (Sessions*)[_result objectAtIndex:i];
-    //
-    //        printf("\n%s \n%d \n%s \n%s \n%s \n%c",[s1.name UTF8String],s1.id,[s1.descrption UTF8String],[s1.type UTF8String],[s1.location UTF8String],s1.like);
-    //    }
-    //
-    
-    
-    
-    
-    
-    //            for (Speaker *sp  in s.speakers) {
-    //                printf("\nuser speaker name %s %s",[[sp fristName]UTF8String],[[sp lastName]UTF8String]);
-    //
-    //                for (MobilesOfSpeakers *mobile in sp.mobiles) {
-    //                    printf("\nuser mobiles num %s ",[[mobile mobilenum] UTF8String]);
-    //                }
-    //
-    //                for (PhonesOfSpeakers *phone in sp.phones) {
-    //                    printf("\nuser phones num %s ",[[phone phonenum] UTF8String]);
-    //                }
-    //            }
-}
+    [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MDW 2016 Mobile APP-09.png"]]];
+    }
 
 
 - (void)didReceiveMemoryWarning
@@ -158,38 +108,74 @@
     
     NSMutableString *date = [[NSMutableString alloc]initWithFormat:@"%@ - %@",str1,str2];
     
-    //    printf("\n%s \n%d of %d \n%s \n%s \n%s \n%f",[str1 UTF8String],indexPath.row,_result.count,[str2 UTF8String],[s.type UTF8String],[s.location UTF8String],s.startDate);
+    UIImageView *imgv = (UIImageView*)[cell viewWithTag:4];
+    UILabel *la = (UILabel*)[cell viewWithTag:5] ;
+    [la setText:@"15"];
     
-    [(UILabel*)[cell viewWithTag:1] setText:s.name];
-    UILabel * l = (UILabel*)[cell viewWithTag:2];
-    l.font = [UIFont fontWithName:@"Monotype Corsiva" size:14.0f];
-    [l setText:s.location];
-    [(UILabel*)[cell viewWithTag:3] setText:date];
-    cell.imageView.image = _icons[i];
-    if (i==2) {
-        i=0;
-    }else{
-        i++;
-    }
+    if ([[s type] isEqualToString:@"Workshop"]) {
+        imgv.image = [UIImage imageNamed:@"workshop.png"];
+    }else if([[s type] isEqualToString:@"Break"]){
+        imgv.image = [UIImage imageNamed:@"breakicon.png"];
+        [la setText:@""];
+    }else if([[s type] isEqualToString:@"Session"]){
+        imgv.image = [UIImage imageNamed:@"session.png"];
+    }else //if([[s type] isEqualToString:@"Hackathon"]){
+        imgv.image = [UIImage imageNamed:@"hacathon.png"];
+
+    
+    [self htmlToUiLable:s.name :(UILabel*)[cell viewWithTag:1]];
+    [self htmlToUiLable:s.location :(UILabel*)[cell viewWithTag:2]];
+    [self htmlToUiLable:date :(UILabel*)[cell viewWithTag:3]];
     
     return cell;
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *head = [[UIView alloc] initWithFrame:CGRectMake(50, 0, tableView.frame.size.width, 100.0)];
-    head.backgroundColor = [UIColor orangeColor];
-    head.bounds  =CGRectMake(50, 50, 50, 50);
-    
-    
-    //    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, tableView.frame.size.width, 25.0)];
-    //    lab.backgroundColor = [UIColor clearColor];
-    //    lab.font = [UIFont fontWithName:@"Verdana" size:20.0];
-    //    lab.textAlignment = NSTextAlignmentCenter;
-    //    lab.text = @"MDW Agenda";
-    //    [head addSubview:lab];
-    
-    return head;
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 45.0;
 }
+
+
+
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    // 1. Dequeue the custom header cell
+    IOSTableViewCell* headerCell = [tableView dequeueReusableCellWithIdentifier:@"cellheader"];
+    
+    // 2. Set the various properties
+    headerCell.labelName.text = @"Second Day";
+    [headerCell.labelName sizeToFit];
+    
+    headerCell.imageV.image = [UIImage imageNamed:@"agenda.png"];
+    
+    // 3. And return
+    return headerCell;
+}
+
+- (BOOL)slideNavigationControllerShouldDisplayRightMenu
+{
+    printf("\n slider \n");
+    return YES;
+}
+/*
+ 
+ 
+ -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+ UIView *head = [[UIView alloc] initWithFrame:CGRectMake(50, 0, tableView.frame.size.width, 100.0)];
+ head.backgroundColor = [UIColor orangeColor];
+ head.bounds  =CGRectMake(50, 50, 50, 50);
+ 
+ 
+ //    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, tableView.frame.size.width, 25.0)];
+ //    lab.backgroundColor = [UIColor clearColor];
+ //    lab.font = [UIFont fontWithName:@"Verdana" size:20.0];
+ //    lab.textAlignment = NSTextAlignmentCenter;
+ //    lab.text = @"MDW Agenda";
+ //    [head addSubview:lab];
+ 
+ return head;
+ }
+ */
 
 /*
 // Override to support conditional editing of the table view.
@@ -244,6 +230,19 @@
 
 }
 
+
+
+-(void)htmlToUiLable: (NSString *) title : (UILabel *) titleLable
+{
+    
+    NSString * htmlString = title;
+    
+    NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[htmlString dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+    
+    
+    titleLable.attributedText = attrStr;
+    
+}
  
 
 @end

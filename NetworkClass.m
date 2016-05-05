@@ -11,11 +11,17 @@
 #import "Agenda.h"
 #import "Sessions.h"
 #import "Exhiptors.h"
+#import "MobilesOfExhiptors.h"
+#import "PhonesOfExhiptors.h"
 #import "User.h"
 #import "CoreDataManager.h"
 #import "Speaker.h"
 #import "MobilesOfSpeakers.h"
 #import "PhonesOfSpeakers.h"
+#import "AllSpeakers.h"
+#import "AllSpeakerPhone.h"
+#import "AllSpeakersMobiles.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation NetworkClass{
      NSDictionary *dictionary;
@@ -23,29 +29,97 @@
 @synthesize managedObjectContext = _managedObjectContext;
 
 
-- (NSDictionary *)getSpeakers{
-    // 1
-    NSString *string = @"http://www.mobiledeveloperweekend.net/MDW/service/getSpeakers?userName=moh.said511@gmail.com";
-    printf("ahmed__");
+- (void)getSpeakers{
+    //1
+    
+    // 2
+    NSString *string = @"http://www.mobiledeveloperweekend.net/service/getSpeakers?userName=eng.medhat.cs.h@gmail.com";
     dictionary=[NSDictionary new];
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
-    // 2
+    // 3
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         // 3
-       
+        printf("network");
         dictionary= (NSDictionary *)responseObject;
-        NSLog([dictionary objectForKey:@"status"]);
-        [_myDelegate dataRecived:dictionary];
+        NSMutableArray *arrayOfResult = [dictionary objectForKey:@"result"];
+        NSMutableArray *arrayOfSpeakers=[NSMutableArray new];
+        //4
+        CoreDataManager *core = [CoreDataManager new];
+        _managedObjectContext = core.managedObjectContext;
+        [core trunkateEntity:@"AllSpeakerPhone"];
+        [core trunkateEntity:@"AllSpeakersMobiles"];
+        [core trunkateEntity:@"AllSpeakers"];
+        for (int i=0; i<[arrayOfResult count]; i++) {
+            NSMutableDictionary *speakersDict = [arrayOfResult objectAtIndex:i];
+            printf("test");
+            AllSpeakers *speakers = [NSEntityDescription insertNewObjectForEntityForName: @"AllSpeakers"inManagedObjectContext:_managedObjectContext];
+            
+            
+            // [speakers setId:[[speakersDict objectForKey:@"id"] integerValue]];
+            [speakers setFristName:[speakersDict objectForKey:@"firstName"]];
+            [speakers setLastName:[speakersDict objectForKey:@"lastName"]];
+            [speakers setCompanyName:[speakersDict objectForKey:@"companyName"]];
+            [speakers setTitle:[speakersDict objectForKey:@"title"]];
+            ////////phones
+            NSMutableArray *phonesArray=[NSMutableArray new];
+            phonesArray=[speakersDict objectForKey:@"phones"];
+            
+            for(int i=0;i<phonesArray.count;i++){
+                AllSpeakerPhone *phones=[NSEntityDescription insertNewObjectForEntityForName:@"AllSpeakerPhone" inManagedObjectContext:_managedObjectContext];
+                NSString *phone_num=phonesArray [i];
+                [core saveManagedObject];
+                phones.phonenum=phone_num;
+                [speakers addPhonesObject:phones];
+                [core saveManagedObject];
+                
+            }
+            /////mobiles
+            NSMutableArray *mobilesArray=[NSMutableArray new];
+            phonesArray=[speakersDict objectForKey:@"mobiles"];
+            
+            for(int i=0;i<mobilesArray.count;i++){
+                AllSpeakersMobiles *mobiles=[NSEntityDescription insertNewObjectForEntityForName:@"AllSpeakersMobiles" inManagedObjectContext:_managedObjectContext];
+                NSString *mobile_num=mobilesArray[i];
+                [core saveManagedObject];
+                mobiles.mobilenum=mobile_num;
+                [speakers addMobilesObject:mobiles];
+                [core saveManagedObject];
+            }
+            
+            [speakers setMiddleName:[speakersDict objectForKey:@"middleName"]];
+            [speakers setBiography:[speakersDict objectForKey:@"biography"]];
+            [speakers setGender:[speakersDict objectForKey:@"gender"]];
+            [speakers setImgurl:[speakersDict objectForKey:@"imageURL"]];
+            
+            
+            NSURL *url = [NSURL URLWithString:[speakersDict objectForKey:@"imageURL"]];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            
+            
+            [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                speakers.img = data;
+                [core saveManagedObject];
+            }];
+            
+            
+
+            
+            [arrayOfSpeakers addObject:speakers];
+            
+        }
+        [core saveManagedObject];
+        [_myDelegate dataRecived:arrayOfSpeakers];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         // 4
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Weather"
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Data"
                                                             message:[error localizedDescription]
                                                            delegate:nil
                                                   cancelButtonTitle:@"Ok"
@@ -55,22 +129,11 @@
     
     // 5
     [operation start];
-    return dictionary;
-
 }
 
+
 - (void)getSessions{
-    CoreDataManager *core = [CoreDataManager new];
-    _managedObjectContext = core.managedObjectContext;
-    
-    
-    
-    //trunkate tables before re filling
-    [core trunkateEntity:@"PhonesOfSpeakers"];
-    [core trunkateEntity:@"MobilesOfSpeakers"];
-    [core trunkateEntity:@"Speaker"];
-    [core trunkateEntity:@"Sessions"];
-    [core trunkateEntity:@"Agenda"];
+ 
 
     NSString *string = @"http://www.mobiledeveloperweekend.net/service/getSessions?userName=eng.medhat.cs.h@gmail.com";
     
@@ -86,14 +149,24 @@
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         // 3
-        printf("\nkeda ahmed gab data  %d \n",2);
 
         dictionary= (NSDictionary *)responseObject;
         NSDictionary *dicOfResult = [dictionary objectForKey:@"result"];
         NSMutableArray *agendas=[dicOfResult objectForKey:@"agendas"];
         NSMutableArray *arrayOfAgendas=[NSMutableArray new];
         NSMutableArray *arrayOfSessions=[NSMutableArray new];
-
+        
+        CoreDataManager *core = [CoreDataManager new];
+        _managedObjectContext = core.managedObjectContext;
+        
+        
+        
+        //trunkate tables before re filling
+        [core trunkateEntity:@"PhonesOfSpeakers"];
+        [core trunkateEntity:@"MobilesOfSpeakers"];
+        [core trunkateEntity:@"Speaker"];
+        [core trunkateEntity:@"Sessions"];
+        [core trunkateEntity:@"Agenda"];
 
         for (int x=0; x<[agendas count]; x++) {
             
@@ -162,20 +235,39 @@
                         speaker.companyName = [speakerDict objectForKey:@"companyName"];
                         speaker.title = [speakerDict objectForKey:@"title"];
                         
-                        //                    MobilesOfSpeakers *m = [NSEntityDescription insertNewObjectForEntityForName:@"MobilesOfSpeakers" inManagedObjectContext:_managedObjectContext];
-                        //                    [m setMobilenum:@"01203265"];
-                        //
-                        //                    MobilesOfSpeakers *m1 = [NSEntityDescription insertNewObjectForEntityForName:@"MobilesOfSpeakers" inManagedObjectContext:_managedObjectContext];
-                        //                    [m1 setMobilenum:@"010352369"];
-                        //
-                        //
-                        //                    PhonesOfSpeakers *p = [NSEntityDescription insertNewObjectForEntityForName:@"PhonesOfSpeakers" inManagedObjectContext:_managedObjectContext];
-                        //                    [p setPhonenum:@"0456982365"];
-                        //                    PhonesOfSpeakers *p1 = [NSEntityDescription insertNewObjectForEntityForName:@"PhonesOfSpeakers" inManagedObjectContext:_managedObjectContext];
-                        //                    [p1 setPhonenum:@"0103265"];
-                        //                    
-                        //                    [speaker addMobiles:[NSSet setWithObjects:m,m1, nil]];
-                        //                    [speaker addPhones:[NSSet setWithObjects:p,p1, nil]];
+                        NSURL *url = [NSURL URLWithString:[speakerDict objectForKey:@"imageURL"]];
+                        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+                        
+                        
+                        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                            speaker.img = data;
+                            [core saveManagedObject];
+                        }];
+                        
+                        NSMutableArray *phonesArray=[NSMutableArray new];
+                        phonesArray=[speakerDict objectForKey:@"phones"];
+                        
+                        for(int i=0;i<phonesArray.count;i++){
+                            PhonesOfSpeakers *phones=[NSEntityDescription insertNewObjectForEntityForName:@"PhonesOfSpeakers" inManagedObjectContext:_managedObjectContext];
+                            NSString *phone_num=phonesArray [i];
+                            [core saveManagedObject];
+                            phones.phonenum=phone_num;
+                            [speaker addPhonesObject:phones];
+                            [core saveManagedObject];
+                            
+                        }
+                        /////mobiles
+                        NSMutableArray *mobilesArray=[NSMutableArray new];
+                        phonesArray=[speakerDict objectForKey:@"mobiles"];
+                        
+                        for(int i=0;i<mobilesArray.count;i++){
+                            MobilesOfSpeakers *mobiles=[NSEntityDescription insertNewObjectForEntityForName:@"MobilesOfSpeakers" inManagedObjectContext:_managedObjectContext];
+                            NSString *mobile_num=mobilesArray[i];
+                            [core saveManagedObject];
+                            mobiles.mobilenum=mobile_num;
+                            [speaker addMobilesObject:mobiles];
+                            [core saveManagedObject];
+                        }
                         
                         [core saveManagedObject];
                         [sp addObject:speaker];
@@ -222,6 +314,8 @@
 
 -(void)getExhiptors{
     // 1
+    
+    
     NSString *string = @"http://www.mobiledeveloperweekend.net/service/getExhibitors?userName=eng.medhat.cs.h@gmail.com";
     printf("ahmed__");
     dictionary=[NSDictionary new];
@@ -235,31 +329,86 @@
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         // 3
-        
+        printf("network");
         dictionary= (NSDictionary *)responseObject;
         NSMutableArray *arrayOfResult = [dictionary objectForKey:@"result"];
         NSMutableArray *arrayOfExhiptors=[NSMutableArray new];
+        CoreDataManager *core = [CoreDataManager new];
+        _managedObjectContext = core.managedObjectContext;
+
+        [core trunkateEntity:@"MobilesOfExhiptors"];
+        [core trunkateEntity:@"PhonesOfExhiptors"];
+        [core trunkateEntity:@"Exhiptors"];
+        
+
         
         for (int i=0; i<[arrayOfResult count]; i++) {
             
             NSMutableDictionary *exhiptorDict = [arrayOfResult objectAtIndex:i];
-            Exhiptors *exhiptor=[Exhiptors new];
+            printf("test");
+            
+            Exhiptors *exhiptor = [NSEntityDescription insertNewObjectForEntityForName: @"Exhiptors"inManagedObjectContext:_managedObjectContext];
+            
+            
+            //Exhiptors *exhiptor=[NSManagedObject new];
             [exhiptor setId:[[exhiptorDict objectForKey:@"id"] integerValue]];
             [exhiptor setImgurl:[exhiptorDict objectForKey:@"imageURL"]];
+            
+            
+            
+            NSURL *url = [NSURL URLWithString:[exhiptorDict objectForKey:@"imageURL"]];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            
+            
+            [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                exhiptor.img = data;
+                [core saveManagedObject];
+            }];
+
             [exhiptor setCompanyAddress:[exhiptorDict objectForKey:@"companyAddress"]];
             [exhiptor setEmailExh:[exhiptorDict objectForKey:@"email"]];
             [exhiptor setCountryName:[exhiptorDict objectForKey:@"countryName"]];
             [exhiptor setCityName:[exhiptorDict objectForKey:@"cityName"]];
             [exhiptor setCompanyName:[exhiptorDict objectForKey:@"companyName"]];
-            [exhiptor setPhones:[exhiptorDict objectForKey:@"phones"]];
-            [exhiptor setMobiles:[exhiptorDict objectForKey:@"mobiles"]];
+            // [exhiptor setPhones:[exhiptorDict objectForKey:@"phones"]];
+            // [exhiptor setMobiles:[exhiptorDict objectForKey:@"mobiles"]];
             [exhiptor setCompanyAbout:[exhiptorDict objectForKey:@"companyAbout"]];
             [exhiptor setFax:[exhiptorDict objectForKey:@"fax"]];
             [exhiptor setContactName:[exhiptorDict objectForKey:@"contactName"]];
             [exhiptor setCompanyUrl:[exhiptorDict objectForKey:@"companyUrl"]];
+            
+            NSMutableArray *phonesArray=[NSMutableArray new];
+            phonesArray=[exhiptorDict objectForKey:@"phones"];
+            
+            for(int i=0;i<phonesArray.count;i++){
+                PhonesOfExhiptors *phones=[NSEntityDescription insertNewObjectForEntityForName:@"PhonesOfExhiptors" inManagedObjectContext:_managedObjectContext];
+                NSString *phone_num=phonesArray [i];
+                NSError *error=nil;
+                phones.phonenum=phone_num;
+                [exhiptor addPhonesObject:phones];
+                 [core saveManagedObject];
+                
+            }
+            
+            
+            NSMutableArray *mobilesArray=[NSMutableArray new];
+            phonesArray=[exhiptorDict objectForKey:@"mobiles"];
+            
+            for(int i=0;i<mobilesArray.count;i++){
+                MobilesOfExhiptors *mobiles=[NSEntityDescription insertNewObjectForEntityForName:@"MobilesOfExhiptors" inManagedObjectContext:_managedObjectContext];
+                NSString *mobile_num=mobilesArray[i];
+                NSError *error=nil;
+                mobiles.mobilenum=mobile_num;
+                [exhiptor addMobilesObject:mobiles];
+                 [core saveManagedObject];
+                
+            }
+            
             [arrayOfExhiptors addObject:exhiptor];
+            [core saveManagedObject];
+            
         }
-
+        
         [_myDelegate dataRecived:arrayOfExhiptors];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -278,6 +427,11 @@
 
 
 -(void)loginWithName:(NSString *)name andPassword:(NSString *)pass{
+    
+    
+    CoreDataManager *core = [CoreDataManager new];
+    _managedObjectContext = core.managedObjectContext;
+    
     // 1
     NSString *string =[NSString stringWithFormat:@"http://www.mobiledeveloperweekend.net/service/login?userName=%@&password=%@",name,pass];
     dictionary=[NSDictionary new];
@@ -293,24 +447,20 @@
         // 3
         
         dictionary= (NSDictionary *)responseObject;
-         NSMutableDictionary *userDic = [responseObject objectForKey:@"result"];
-        User *user=[User new];
-        [user setId:[[userDic objectForKey:@"id"] numberFromString:[userDic objectForKey:@"id"]]];
+        NSMutableDictionary *userDic = [responseObject objectForKey:@"result"];
+        User *user= [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:_managedObjectContext];
+        
         [user setCode:[userDic objectForKey:@"code"]];
         [user setTitle:[userDic objectForKey:@"title"]];
         [user setMiddleName:[userDic objectForKey:@"middleName"]];
-        [user setCityName:[userDic objectForKey:@"cityName"]];
         [user setCompanyName:[userDic objectForKey:@"companyName"]];
-        [user setPhones:[userDic objectForKey:@"phones"]];
-        [user setMobiles:[userDic objectForKey:@"mobiles"]];
+       // [user setPhones:[NSSet setWithArray:[userDic objectForKey:@"phones"]]];
+       //[user setMobiles:[NSSet setWithArray:[userDic objectForKey:@"mobiles"]]];
         [user setEmail:[userDic objectForKey:@"email"]];
         [user setFirstName:[userDic objectForKey:@"firstName"]];
         [user setLastName:[userDic objectForKey:@"lastName"]];
         [user setImgurl:[userDic objectForKey:@"imageURL"]];
-       NSString* dateString=[userDic objectForKey:@"birthDate"];
-        double getDate=[dateString doubleValue];
-        double seconds = getDate / 1000;
-        NSDate *date = [NSDate dateWithTimeIntervalSince1970:seconds];
+        [core saveManagedObject];
         [_myDelegate setUser:user];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -326,4 +476,5 @@
     // 5
     [operation start];
 }
+
 @end

@@ -17,13 +17,18 @@
 #import "NetworkClass.h"
 #import "NetworkManger.h"
 #import "Reachability.h"
+#import "IOSTableViewCell.h"
+#import "IOSSortingArray.h"
 
 @interface IOSAgenda ()
 
 @end
 
 @implementation IOSAgenda{
-    int i ;
+    NSMutableArray *firstAgenda, *secondAgenda, *thirdAgenda;
+    CoreDataManager *core;
+    IOSSortingArray *sort;
+    NSUserDefaults *def;
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -37,52 +42,110 @@
 
 - (void)dataRecived:(NSMutableArray *) data{
     if (data != nil) {
-        _result = [NSMutableArray new];
-    }
-    for (int b = 0; b <[data count]; b++) {
-//        printf("object from  %d count %d\n",b,[[[data[b] agendaSessions] allObjects] count]);
-        [_result addObjectsFromArray:[[data[b] agendaSessions] allObjects]];
-    }
-    
-    if (_result != nil) {
+        
+
+        firstAgenda = [[[data[0] agendaSessions]allObjects]mutableCopy];
+        firstAgenda = [sort sortingArray:firstAgenda key:@"startDate" endDate:@"endDate"];
+        
+        
+        secondAgenda = [[[data[1] agendaSessions]allObjects]mutableCopy];
+        secondAgenda = [sort sortingArray:secondAgenda key:@"startDate" endDate:@"endDate"];
+        
+        thirdAgenda = [[[data[2] agendaSessions]allObjects]mutableCopy];
+        thirdAgenda = [sort sortingArray:thirdAgenda key:@"startDate" endDate:@"endDate"];
+        
         [self.tableView reloadData];
     }
+
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+//    self.navigationItem.hidesBackButton = YES;
+
+    def = [NSUserDefaults standardUserDefaults];
+    printf("\n User Defalts %s",[[def objectForKey:@"userEmail"] UTF8String]);
+    sort = [IOSSortingArray new];
     
-    self.automaticallyAdjustsScrollViewInsets = YES;
+    firstAgenda = [NSMutableArray new];
+    secondAgenda = [NSMutableArray new];
+    thirdAgenda = [NSMutableArray new];
     
     
     Reachability *reach = [Reachability reachabilityWithHostName:@"www.google.com"];
     NetworkStatus status = [reach currentReachabilityStatus];
     if (status == NotReachable) {
-        printf("\nNotReachable\n");
-        CoreDataManager *core = [CoreDataManager new];
-        NSMutableArray *agendas = [core fetchEntitiesWithClassName:@"Agenda" sortDescriptors:nil predicate:nil];
-        _result = [NSMutableArray new];
+
+        core = [CoreDataManager new];
         
-        for (int b = 0; b <[agendas count]; b++) {
-            [_result addObjectsFromArray:[[agendas[b] agendaSessions] allObjects]];
+        
+        
+        NSMutableArray *agendas = [core fetchEntitiesWithClassName:@"Agenda" sortDescriptors:nil predicate:nil];
+        
+
+        if (agendas.count > 0) {
+            firstAgenda = [[[agendas[0] agendaSessions] allObjects] mutableCopy];
+            firstAgenda = [sort sortingArray:firstAgenda key:@"startDate" endDate:@"endDate"];
+            
+            secondAgenda = [[[agendas[1] agendaSessions] allObjects] mutableCopy];
+            secondAgenda = [sort sortingArray:secondAgenda key:@"startDate" endDate:@"endDate"];
+            
+            thirdAgenda = [[[agendas[2] agendaSessions] allObjects] mutableCopy];
+            thirdAgenda = [sort sortingArray:thirdAgenda key:@"startDate" endDate:@"endDate"];
+            
+            if(_flag == true)
+            {
+                
+                printf("Opa el koko");
+                NSMutableArray *myArray;
+                for(Sessions *s in firstAgenda){
+                    myArray=[NSMutableArray new];
+                    
+                    if(s.like==[[NSNumber alloc]initWithInt:1])
+                    {
+                        [myArray addObject:s];
+                    }
+                    
+                }
+                firstAgenda=myArray;
+                
+                for(Sessions *s in secondAgenda){
+                    myArray=[NSMutableArray new];
+                    
+                    if(s.like==[[NSNumber alloc]initWithInt:1])
+                    {
+                        [myArray addObject:s];
+                    }
+                    
+                }
+                secondAgenda=myArray;
+                
+                for(Sessions *s in thirdAgenda){
+                    myArray=[NSMutableArray new];
+                    
+                    if(s.like==[[NSNumber alloc]initWithInt:1])
+                    {
+                        [myArray addObject:s];
+                    }
+                    
+                }
+                thirdAgenda=myArray;
+            }
         }
+        
+        
+        
+        
+        
     } else {
         printf("\nConnected\n");
         NetworkManger *manager = [NetworkManger new];
         NetworkClass *c = [manager getNetworkInstance];
+        printf("\n%s\n",[c.sharedUserEmail UTF8String]);
         [c setMyDelegate:self];
         [c getSessions];
     }
-    
-    i = 0;
-    _icons = [NSMutableArray new];
-    
-    [_icons addObject:[UIImage imageNamed:@"first.png"]];
-    [_icons addObject:[UIImage imageNamed:@"second.png"]];
-    [_icons addObject:[UIImage imageNamed:@"third.png"]];
-    
-    
     
 
     // Uncomment the following line to preserve selection between presentations.
@@ -96,7 +159,7 @@
 -(void)viewDidAppear:(BOOL)animated{
     
 //    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
-    [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]]];
+    [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MDW 2016 Mobile APP-09.png"]]];
     [self.tabBarController.tabBar setBackgroundColor:[UIColor redColor]];
 }
 
@@ -113,13 +176,24 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    int rows;
     // Return the number of rows in the section.
-    return _result.count;
+    if (section == 0) {
+        rows = [firstAgenda count];
+    }
+    else if (section == 1) {
+        rows = [secondAgenda count];
+    }
+    else {
+        rows = [thirdAgenda count];
+    }
+    
+    return rows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -129,7 +203,35 @@
     
     // Configure the cell...
     
-    Sessions *s = (Sessions*)[_result objectAtIndex:indexPath.row];
+    Sessions *s ;
+    UIImageView *imgv = (UIImageView*)[cell viewWithTag:4];
+    UILabel *la = (UILabel*)[cell viewWithTag:5] ;
+    
+    
+    if (indexPath.section == 0) {
+        s = (Sessions*)[firstAgenda objectAtIndex:indexPath.row];
+        [la setText:@"14"];
+    }else if (indexPath.section == 1) {
+        s = (Sessions*)[secondAgenda objectAtIndex:indexPath.row];
+        [la setText:@"15"];
+    }else {
+        s = (Sessions*)[thirdAgenda objectAtIndex:indexPath.row];
+        [la setText:@"16"];
+    }
+    
+   
+    
+    if ([[s type] isEqualToString:@"Workshop"]) {
+        imgv.image = [UIImage imageNamed:@"workshop.png"];
+    }else if([[s type] isEqualToString:@"Break"]){
+        imgv.image = [UIImage imageNamed:@"breakicon.png"];
+        [la setText:@""];
+    }else if([[s type] isEqualToString:@"Session"]){
+        imgv.image = [UIImage imageNamed:@"session.png"];
+    }else
+        imgv.image = [UIImage imageNamed:@"hacathon.png"];
+         
+    
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"HH:mm"];
@@ -146,81 +248,61 @@
     
 
     
-    [(UILabel*)[cell viewWithTag:1] setText:s.name];
-    UILabel * l = (UILabel*)[cell viewWithTag:2];
-    l.font = [UIFont fontWithName:@"Arial" size:14.0f];
-    [l setText:s.location];
-    [(UILabel*)[cell viewWithTag:3] setText:date];
+    //[(UILabel*)[cell viewWithTag:1] setText:s.name];
+    [self htmlToUiLable:s.name :(UILabel*)[cell viewWithTag:1]];
+    [self htmlToUiLable:s.location :(UILabel*)[cell viewWithTag:2]];
+    [self htmlToUiLable:date :(UILabel*)[cell viewWithTag:3]];
+//    UILabel * l = (UILabel*)[cell viewWithTag:2];
+//    l.font = [UIFont fontWithName:@"Arial" size:14.0f];
+//    [l setText:s.location];
+//    [(UILabel*)[cell viewWithTag:3] setText:date];
     
-    cell.imageView.image = _icons[i];
-    if (i==2) {
-        i=0;
-    }else{
-        i++;
-    }
     return cell;
 }
 
-
-//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    [self performSegueWithIdentifier:@"move" sender:indexPath];
-//}
-
-
-
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *head = [[UIView alloc] initWithFrame:CGRectMake(50, 0, tableView.frame.size.width, 100.0)];
-    head.backgroundColor = [UIColor orangeColor];
-    head.bounds  =CGRectMake(50, 50, 50, 50);
-    
-    
-//    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, tableView.frame.size.width, 25.0)];
-//    lab.backgroundColor = [UIColor clearColor];
-//    lab.font = [UIFont fontWithName:@"Verdana" size:20.0];
-//    lab.textAlignment = NSTextAlignmentCenter;
-//    lab.text = @"MDW Agenda";
-//    [head addSubview:lab];
-    
-    return head;
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return 45.0;
+    }
+    return 0.0;
 }
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+
+
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    // Return NO if you do not want the specified item to be editable.
+    // 1. Dequeue the custom header cell
+    IOSTableViewCell* headerCell = nil;
+    
+    // 2. Set the various properties
+    
+    if (section == 0) {
+        headerCell = [tableView dequeueReusableCellWithIdentifier:@"cellheader"];
+        headerCell.labelName.text = @"Agenda";
+        [headerCell.labelName sizeToFit];
+        
+        headerCell.imageV.image = [UIImage imageNamed:@"agenda.png"];
+    }
+//    else if (section == 1) {
+//        headerCell.labelName.text = @"Second Day";
+//        [headerCell.labelName sizeToFit];
+//    }
+//    else {
+//        headerCell.labelName.text = @"Third Day";
+//        [headerCell.labelName sizeToFit];
+//    }
+    
+    
+    
+    
+    // 3. And return
+    return headerCell;
+}
+
+- (BOOL)slideNavigationControllerShouldDisplayRightMenu
+{
+    printf("\n slider \n");
     return YES;
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 
 #pragma mark - Navigation
@@ -231,11 +313,33 @@
     if ([segue.identifier isEqualToString:@"move"]) {
         IOSSessionDetailsView *details =  [segue destinationViewController];
         NSIndexPath *index = [self.tableView indexPathForCell:sender];
-        details.session = [_result objectAtIndex:index.row];
+        
+        if (index.section == 0) {
+            details.session = [firstAgenda objectAtIndex:index.row];
+        }
+        else if (index.section == 1) {
+            details.session = [secondAgenda objectAtIndex:index.row];
+        }
+        else {
+            details.session = [thirdAgenda objectAtIndex:index.row];
+        }
+        
+        
     }
     
 }
 
+-(void)htmlToUiLable: (NSString *) title : (UILabel *) titleLable
+{
+    
+    NSString * htmlString = title;
+    
+    NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[htmlString dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+    
+    
+    titleLable.attributedText = attrStr;
+    
+}
 
 
 @end
